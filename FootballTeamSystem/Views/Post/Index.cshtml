@@ -1,0 +1,44 @@
+﻿@using FootballTeamSystem.Data.Model
+@model IEnumerable<FootballTeamSystem.Models.PostViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <ul class="breadcrumb">
+            <li><a href="/">Начало</a></li>
+            <li class="active">Публикации</li>
+        </ul>
+        <h2 class="pull-left">Всички Публикации</h2>
+      @{
+          if (User.IsInRole(RoleName.CanManagePosts))
+          {
+              @Html.ActionLink("Създай нова публикация", "Create", null, new { @class = "btn btn-primary pull-right", id = "createPost" })
+          }
+      }
+    </div>
+    <div class="row">
+        <div class="col">
+            @foreach (var post in Model.OrderByDescending(date => date.CreatedOn))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <a href="../post/details/@post.Id">
+                            <h3 class="panel-title">@post.Title</h3>
+                        </a><small class="">@post.Author.UserName</small>
+                    </div>
+                    <div class="panel-body">
+                        <img src="@post.ImagePath" class="img-responsive img-thumbnail pull-left postImage">
+                        <p class="postDescription">@post.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

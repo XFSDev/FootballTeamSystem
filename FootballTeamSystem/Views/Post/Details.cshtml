@@ -1,0 +1,38 @@
+﻿@using FootballTeamSystem.Data.Model
+@model FootballTeamSystem.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <ul class="breadcrumb">
+            <li><a href="/">Начало</a></li>
+            <li><a href="/posts/">Публикации</a></li>
+            <li class="active">@Model.Title</li>
+        </ul>
+        <div class="col-md-10">
+            <h2> @Model.Title</h2>
+           
+        </div>
+        <div class="col-md-2">
+            @{
+                if (User.IsInRole(RoleName.CanManagePosts))
+                {
+                    @Html.ActionLink("Редактирай", "Edit",new {id = Model.Id}, new { @class = "btn btn-primary pull-right", id = "editPost" })
+                }
+            }
+        </div>
+        <div class="col-md-12">
+            <p>Posted by @Model.Author.Email <span class="pull-right"><em> @Model.CreatedOn.ToLongDateString()</em></span> </p>
+        </div>
+    </div>
+    <div class="row">
+        <img src="@Model.ImagePath" class="img-responsive img-thumbnail pull-left postImage-details">
+        <p class="body-content text-justify">@Model.Content</p>
+    </div>
+</div>
+
+
