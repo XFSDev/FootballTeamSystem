@@ -104,9 +104,36 @@ namespace FootballTeamSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-
-
             return this.View("Edit", model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = RoleName.CanManagePosts)]
+        public ActionResult Delete(Guid id)
+        {
+            var post = _data.Posts.GetPost(id);
+
+            if (post == null)
+                return HttpNotFound();
+
+            return this.View(Mapper.Map<Post, PostViewModel>(post));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = RoleName.CanManagePosts)]
+        public ActionResult Delete(PostViewModel model)
+        {
+            var postForDelete = _data.Posts.GetPost(model.Id);
+
+            if (postForDelete == null)
+            {
+                return HttpNotFound();
+            }
+
+            _data.Posts.Delete(postForDelete);
+            _data.SaveCanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
