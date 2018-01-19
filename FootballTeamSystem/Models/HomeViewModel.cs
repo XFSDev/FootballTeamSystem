@@ -4,6 +4,6 @@ namespace FootballTeamSystem.Models
 {
     public class HomeViewModel
     {
-        public ICollection<PostViewModel> Posts { get; set; }
+        public IEnumerable<PostViewModel> Posts { get; set; }
     }
 }

@@ -1,13 +1,9 @@
 ﻿@using FootballTeamSystem.Data.Model
 @model IEnumerable<FootballTeamSystem.Models.PostViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Публикации";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
-
 
 <div class="container-fluid">
     <div class="row">
@@ -35,7 +31,8 @@
                     </div>
                     <div class="panel-body">
                         <img src="@post.ImagePath" class="img-responsive img-thumbnail pull-left postImage">
-                        <p class="postDescription">@post.Description</p>
+                        <div class="postDescription">@Html.Raw(post.Description)</div>
+                        <a href="../post/details/@post.Id" class="btn btn-primary btn-sm pull-right">Прочети още</a>
                     </div>
                 </div>
             }

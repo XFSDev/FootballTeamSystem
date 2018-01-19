@@ -5,6 +5,8 @@ using FootballTeamSystem.Data.Model;
 
 namespace FootballTeamSystem.Models
 {
+    using System.Web.Mvc;
+
     public class PostViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
 
@@ -16,8 +18,10 @@ namespace FootballTeamSystem.Models
 
         [Required]
         [Display(Name = "Съдържание")]
+        [AllowHtml]
         public string Content { get; set; }
 
+        [AllowHtml]
         public string Description { get; set; }
 
         public User Author { get; set; }

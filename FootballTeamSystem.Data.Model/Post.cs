@@ -6,6 +6,7 @@ using System.Web;
 using FootballTeamSystem.Data.Model.Abstraction;
 using Microsoft.AspNet.Identity;
 
+
 namespace FootballTeamSystem.Data.Model
 {
     public class Post : DataModel

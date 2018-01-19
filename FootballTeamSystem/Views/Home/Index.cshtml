@@ -4,20 +4,95 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@*<div class="row">
+    <div class="col-md-5 col-lg-5">
+        <!-- artigo em destaque -->
+        <div class="featured-article">
+            <a href="#">
+                <img src="http://placehold.it/482x350" alt="" class="thumb">
+            </a>
+            <div class="block-title">
+                <h2>Lorem ipsum dolor asit amet</h2>
+                <p class="by-author"><small>By Jhon Doe</small></p>
+            </div>
+        </div>
+        <!-- /.featured-article -->
+    </div>
+    <div class="col-md-7 col-lg-7">
+        <ul class="media-list main-list">
+           @foreach (var featuredPost in Model.Where(p => p.IsFeaturedPost).Take(3))
+           {
+               <li class="media">
+                   <a class="pull-left" href="#">
+                       <img class="media-object img-responsive featured-thumbnail" src="@featuredPost.ImagePath" alt="...">
+                   </a>
+                   <div class="media-body">
+                       <h4 class="media-heading">@featuredPost.Title</h4>
+                       <p class="by-author">By @featuredPost.Author.UserName</p>
+                   </div>
+               </li>
+           }
+        </ul>
+    </div>
+    </div>*@
 
 <div class="row">
-    @foreach (var post in Model)
+    <!-- Carousel -->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <!-- Static Header -->
+                @foreach (var featuredPost in Model.Where(p => p.IsFeaturedPost).Take(1))
+                {
+                    <img src="@featuredPost.ImagePath" alt="First slide">
+
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12">
+                            <h2>
+                                <span> <strong>@featuredPost.Title</strong></span>
+                            </h2>
+                        </div>
+                    </div><!-- /header-text -->
+                }
+            </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div><!-- /carousel -->
+</div>
+<hr />
+<div class="row">
+    @foreach (var post in Model.Take(3))
+    {
+        <div class="col-md-4">
+            @*<img src="@post.ImagePath"  class="img-responsive img-thumbnail" />*@
+            <h3>@post.Title</h3>
+            <h5>@post.CreatedOn.ToLongDateString()</h5>
+            <p>@Html.Raw(post.Description)</p>
+            <p><a class="btn btn-default" href="../post/details/@post.Id">Прочети &raquo;</a></p>
+        </div>
+    }
+</div>
+<div class="row">
+    @foreach (var post in Model.Skip(3).Take(3))
     {
         <div class="col-md-4">
             <h3>@post.Title</h3>
             <h5>@post.CreatedOn.ToLongDateString()</h5>
-            <p>@post.Description</p>
-            <p><a class="btn btn-default" href="../post/details/@post.Id">Read More &raquo;</a></p>
+            <p>@Html.Raw(post.Description)</p>
+            <p><a class="btn btn-default" href="../post/details/@post.Id">Прочети &raquo;</a></p>
         </div>
     }
 </div>

@@ -21,7 +21,7 @@
             @{
                 if (User.IsInRole(RoleName.CanManagePosts))
                 {
-                    @Html.ActionLink("Редактирай", "Edit",new {id = Model.Id}, new { @class = "btn btn-primary pull-right", id = "editPost" })
+                    @Html.ActionLink("Редактирай", "Edit",new {id = Model.Id}, new { @class = "btn btn-primary btn-sm pull-right", id = "editPost" })
                 }
             }
         </div>
@@ -31,14 +31,14 @@
     </div>
     <div class="row">
         <img src="@Model.ImagePath" class="img-responsive img-thumbnail pull-left postImage-details">
-        <p class="body-content text-justify">@Model.Content</p>
+        <p class="body-content text-justify"> @Html.Raw(Model.Content)  </p>
     </div>
     <div class="row">
         <div class="col-md-4">
             @{
                 if (User.IsInRole(RoleName.CanManagePosts))
                 {
-                    @Html.ActionLink("Изтрий", "Delete", new {id = Model.Id}, new  {@class="btn btn-danger", id = "deletePost"})
+                    @Html.ActionLink("Изтрий", "Delete", new {id = Model.Id}, new  {@class="btn btn-danger btn-sm", id = "deletePost"})
                 }
             }
         </div>

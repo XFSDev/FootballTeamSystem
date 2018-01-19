@@ -19,8 +19,8 @@ namespace FootballTeamSystem.Controllers
         }
         public ActionResult Index()
         {
-            var posts = _data.Posts.GetAllPosts().Select(Mapper.Map<Post, PostViewModel>);
-
+            var posts = _data.Posts.GetAllPosts().Select(Mapper.Map<Post,PostViewModel>);
+            
             return this.View(posts);
         }
 

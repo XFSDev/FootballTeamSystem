@@ -23,7 +23,6 @@ namespace FootballTeamSystem.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-
             var posts = _data.Posts.GetAllPosts().Select(Mapper.Map<Post, PostViewModel>);
 
             return View(posts);
@@ -82,6 +81,7 @@ namespace FootballTeamSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(true)]
         public ActionResult Edit(PostViewModel model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
