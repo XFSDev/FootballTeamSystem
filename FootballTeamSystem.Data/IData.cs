@@ -7,6 +7,8 @@ namespace FootballTeamSystem.Data
     {
         IPostRepository Posts { get; }
 
+        IPlayerRepository Players { get; }
+
         IMsSqlDbContext Context { get; }
 
         int SaveCanges();

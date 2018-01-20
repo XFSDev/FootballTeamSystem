@@ -24,6 +24,7 @@ namespace FootballTeamSystem.Data
         }
 
         public IPostRepository Posts => (IPostRepository)this.GetRepository<Post>();
+        public IPlayerRepository Players => (IPlayerRepository)this.GetRepository<Player>();
 
 
         public IMsSqlDbContext Context => this._context;
@@ -40,6 +41,10 @@ namespace FootballTeamSystem.Data
                     type = typeof(PostRepository);
                 }
 
+                if (typeof(T).IsAssignableFrom(typeof(Player)))
+                {
+                    type = typeof(PlayerRepository);
+                }
 
                 this._repositories.Add(typeof(T), Activator.CreateInstance(type, this._context));
             }

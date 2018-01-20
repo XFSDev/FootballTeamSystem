@@ -1,0 +1,46 @@
+﻿@using FootballTeamSystem.Data.Model
+@model FootballTeamSystem.Models.PlayerViewModel
+
+
+@{
+    ViewBag.Title = "Delete " + Model.FullName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete @Model.FullName</h2>
+
+@using (Html.BeginForm("Delete", "Player", FormMethod.Post, new { @class = "form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.FullName)
+        @Html.TextBoxFor(p => p.FullName, new { @class = "form-control", disabled = "" })
+        @Html.ValidationMessageFor(p => p.FullName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Birthdate)
+        @Html.TextBoxFor(p => p.Birthdate, "{0:d MMMM yyyy}", new { @class = "form-control", disabled = "" })
+        @Html.ValidationMessageFor(p => p.Birthdate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Position)
+        @Html.EnumDropDownListFor(p => p.Position, "Select a field position", new { @class = "form-control", disabled = "" })
+        @Html.ValidationMessageFor(m => m.Position)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.ShirtNumber)
+        @Html.TextBoxFor(p => p.ShirtNumber, new { @class = "form-control", disabled = "" })
+        @Html.ValidationMessageFor(p => p.ShirtNumber)
+    </div>
+
+    <button type="submit" class="btn btn-block btn-danger">Delete Player</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

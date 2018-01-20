@@ -8,6 +8,7 @@ namespace FootballTeamSystem.Data
     public interface IMsSqlDbContext : IDisposable
     {
         IDbSet<Post> Posts { get; set; }
+        IDbSet<Player> Players { get; set; }
 
         int SaveChanges();
         IDbSet<T> Set<T>() where T : class;

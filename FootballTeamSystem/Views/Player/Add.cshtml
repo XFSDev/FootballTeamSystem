@@ -1,0 +1,62 @@
+﻿@using FootballTeamSystem.Data.Model
+@model FootballTeamSystem.Models.PlayerViewModel
+
+
+@{
+    ViewBag.Title = "Add Player";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Player</h2>
+
+@using (Html.BeginForm("Add", "Player",FormMethod.Post, new {@class= "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.FullName)
+        @Html.TextBoxFor(p => p.FullName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.FullName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Birthdate)
+        @Html.TextBoxFor(p => p.Birthdate, "{0:d MMMM yyyy}", new { @Value = "", @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Birthdate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Position)
+        @Html.EnumDropDownListFor(p => p.Position, "Select a field position", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Position)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.ShirtNumber)
+        @Html.TextBoxFor(p => p.ShirtNumber,  new { @Value = " ", @class = "form-control"})
+        @Html.ValidationMessageFor(p => p.ShirtNumber)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(p => p.IsCaptain) Капитан
+        </label>
+        <label>
+            @Html.CheckBoxFor(p => p.IsViceCaptain) Вице Капитан
+        </label>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("playerImage", "Изображение", new { @class = "" })
+        @Html.TextBox("playerImage", null, new { type = "file", @class = "" })
+        <p class="help-block">Позволени формати: jpeg, jpg, png.</p>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

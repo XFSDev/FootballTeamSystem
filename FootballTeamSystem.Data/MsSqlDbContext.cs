@@ -17,6 +17,7 @@ namespace FootballTeamSystem.Data
         }
 
         public virtual IDbSet<Post> Posts { get; set; }
+        public virtual IDbSet<Player> Players { get; set; }
 
 
         public static MsSqlDbContext Create()

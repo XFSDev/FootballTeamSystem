@@ -46,7 +46,7 @@ namespace FootballTeamSystem.Controllers
                 _data.Posts.Add(newPost, image);
                 _data.SaveCanges();
 
-                return RedirectToAction("Index", "Post");
+                return View("Index");
             }
 
             return View("Create", model);

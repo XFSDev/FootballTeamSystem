@@ -62,7 +62,17 @@
     <Compile Include="Migrations\201801081056169_Initialize.Designer.cs">
       <DependentUpon>201801081056169_Initialize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801201017544_AddPlayerModel.cs" />
+    <Compile Include="Migrations\201801201017544_AddPlayerModel.Designer.cs">
+      <DependentUpon>201801201017544_AddPlayerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801201045049_UpdatePlayerModel.cs" />
+    <Compile Include="Migrations\201801201045049_UpdatePlayerModel.Designer.cs">
+      <DependentUpon>201801201045049_UpdatePlayerModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Contracts\IPlayerRepository.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="IMsSqlDbContext.cs" />
     <Compile Include="MsSqlDbContext.cs" />
@@ -82,6 +92,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801081056169_Initialize.resx">
       <DependentUpon>201801081056169_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801201017544_AddPlayerModel.resx">
+      <DependentUpon>201801201017544_AddPlayerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801201045049_UpdatePlayerModel.resx">
+      <DependentUpon>201801201045049_UpdatePlayerModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

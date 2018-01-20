@@ -1,41 +1,9 @@
 ﻿@model IEnumerable<FootballTeamSystem.Models.PostViewModel>
 
 @{
+
     ViewBag.Title = "Home Page";
 }
-
-@*<div class="row">
-    <div class="col-md-5 col-lg-5">
-        <!-- artigo em destaque -->
-        <div class="featured-article">
-            <a href="#">
-                <img src="http://placehold.it/482x350" alt="" class="thumb">
-            </a>
-            <div class="block-title">
-                <h2>Lorem ipsum dolor asit amet</h2>
-                <p class="by-author"><small>By Jhon Doe</small></p>
-            </div>
-        </div>
-        <!-- /.featured-article -->
-    </div>
-    <div class="col-md-7 col-lg-7">
-        <ul class="media-list main-list">
-           @foreach (var featuredPost in Model.Where(p => p.IsFeaturedPost).Take(3))
-           {
-               <li class="media">
-                   <a class="pull-left" href="#">
-                       <img class="media-object img-responsive featured-thumbnail" src="@featuredPost.ImagePath" alt="...">
-                   </a>
-                   <div class="media-body">
-                       <h4 class="media-heading">@featuredPost.Title</h4>
-                       <p class="by-author">By @featuredPost.Author.UserName</p>
-                   </div>
-               </li>
-           }
-        </ul>
-    </div>
-    </div>*@
-
 <div class="row">
     <!-- Carousel -->
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
