@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FootballTeamSystem.ViewModels.Post.ListPostViewModel>
+﻿@using FootballTeamSystem.Controllers
+@model FootballTeamSystem.ViewModels.HomeViewModel
 
 @{
 
@@ -6,61 +7,109 @@
 }
 <div class="row">
     <!-- Carousel -->
-    @*<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
+        @*<ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>*@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Static Header -->
-                @foreach (var featuredPost in Model.Where(fp=> fp.IsFeaturedPost))
-                {
-                    <img src="@featuredPost.UploadedImage" alt="First slide">
 
-                    <div class="header-text hidden-xs">
-                        <div class="col-md-12">
-                            <h2>
-                                <span> <strong>@featuredPost.Title</strong></span>
-                            </h2>
-                        </div>
-                    </div><!-- /header-text -->
-                }
+                <img src="@Model.FeaturedPost.ImagePath" alt="Featured Post">
+
+                <div class="header-text hidden-xs">
+                    <div class="col-md-12">
+                        <h2>
+                            @(Html.ActionLink<PostController>(@Model.FeaturedPost.Title, p => p.Details(Model.FeaturedPost.Id), null, new { @class = "featured-post-title" }))
+                        </h2>
+                    </div>
+                </div><!-- /header-text -->
             </div>
         </div>
         <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-    </div><!-- /carousel -->*@
+        @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>*@
+    </div><!-- /carousel -->
 </div>
 <hr />
-<div class="row">
-    @foreach (var post in Model.Take(3))
-    {
-        <div class="col-md-4">
-            @*<img src="@post.ImagePath"  class="img-responsive img-thumbnail" />*@
-            <h3>@post.Title</h3>
-            <h5>@post.CreatedOn.ToLongDateString()</h5>
-            <p>@Html.Raw(post.Description)</p>
-            <p><a class="btn btn-default" href="../post/details/@post.Id">Read more &raquo;</a></p>
+
+@{var posts = Model.Posts.Count / 2 == 0 ? Model.Posts.Count : Model.Posts.Count / 2; }
+@for (int row = 1; row <= posts; row++)
+{
+    <div class="row">
+        <div class="left-panel">
+            @for (int col = 0; col < 2; col++)
+            {
+                var currentPost = 2 * row + col;
+                if (currentPost == Model.Posts.Count)
+                {
+                    break;
+                }
+                <div class="col-xs-12 col-sm-6 col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="thumbnail">
+                                    <img src="@Model.Posts[currentPost].ImagePath" alt="" class="img-responsive homePostImage img-rounded" />
+                                </div>
+                                <div class="icerik-bilgi">
+                                    <h2>@(Html.ActionLink<PostController>(Model.Posts[currentPost].Title, c=>c.Details(Model.Posts[currentPost].Id)))</h2>
+                                    <p>@Html.Raw(Model.Posts[currentPost].Description) [...]</p>
+                                    <div class="btn-group">
+                                        <a class="btn btn-facebook" href="#" data-toggle="tooltip" title="Share Facebook"><i class="fa fa-facebook"></i></a>
+                                        <a class="btn btn-twitter" href="#" data-toggle="tooltip" title="Share Twitter"><i class="fa fa-twitter"></i></a>
+                                        <a class="btn btn-google" href="#" data-toggle="tooltip" title="Share Google"><i class="fa fa-google"></i></a>
+                                    </div>
+                                        <a href="./post/details/@Model.Posts[currentPost].Id" class="btn btn-primary">
+                                            <span class="btn btn-sm btn-google">Read More <i class="fa fa-chevron-right"></i></span>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-    }
-</div>
-<div class="row">
-    @foreach (var post in Model.Skip(3).Take(3))
-    {
-        <div class="col-md-4">
-            <h3>@post.Title</h3>
-            <h5>@post.CreatedOn.ToLongDateString()</h5>
-            <p>@Html.Raw(post.Description)</p>
-            <p><a class="btn btn-default" href="../post/details/@post.Id">Read more &raquo;</a></p>
+    </div>
+
+}
+
+@*<div class="row">
+        <div class="left-panel">
+            <div class="col-xs-12 col-sm-6 col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://www.istanbluegayrimenkul.com/wp-content/uploads/2014/05/image6.jpg" alt="" /></a>
+                            </div>
+                            <div class="icerik-bilgi">
+                                <a href="#"><h2>Lorem ipsum dolor sit amet</h2></a>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut condimentum eget nunc quis semper. Nunc pellentesque nec libero sed viverra. Donec turpis velit, suscipit sit amet mauris quis, viverra ornare massa. Morbi tellus eros, fringilla eu sodales id, ultricies ut sapien. Duis et tristique enim, vitae mattis neque. Aliquam efficitur, dui id laoreet blandit, lorem […]</p>
+                                <div class="btn-group">
+                                    <a class="btn btn-social btn-facebook" href="#" data-toggle="tooltip" title="Share Facebook"><i class="fa fa-facebook"></i></a>
+                                    <a class="btn btn-social btn-twitter" href="#" data-toggle="tooltip" title="Share Twitter"><i class="fa fa-twitter"></i></a>
+                                    <a class="btn btn-social btn-google" href="#" data-toggle="tooltip" title="Share Google"><i class="fa fa-google"></i></a>
+                                </div>
+                                <a href="#">
+                                    <span class="btn btn-google">Read More <i class="fa fa-chevron-right"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
-</div>
+    </div>*@
+
+
+
+

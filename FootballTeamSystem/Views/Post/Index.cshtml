@@ -2,41 +2,66 @@
 @using FootballTeamSystem.Infrastructure.Constants
 @model IEnumerable<FootballTeamSystem.ViewModels.Post.ListPostViewModel>
 @{
-    ViewBag.Title = "Публикации";
+    ViewBag.Title = "Posts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="row">
+<div class="row">
+    <div class="col-md-12">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
             <li class="active">Posts</li>
         </ul>
-        <h2 class="pull-left">All</h2>
-      @{
-          if (User.IsInRole(RoleName.CanManagePosts))
-          {
-              @(Html.ActionLink<PostController>("Add new post", p => p.Create(), null, new { @class = "btn btn-primary pull-right", id = "createPost" }))
-          }
-      }
-    </div>
-    <div class="row">
-        <div class="col">
-            @foreach (var post in Model.OrderByDescending(date => date.CreatedOn))
-            {
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <a href="../post/details/@post.Id">
-                            <h3 class="panel-title">@post.Title</h3>
-                        </a><small class="">@post.AuthorUserName</small>
-                    </div>
-                    <div class="panel-body">
-                        <img src="@post.ImagePath" class="img-responsive img-thumbnail pull-left postImage" alt="Post image">
-                        <div class="postDescription">@Html.Raw(post.Description)</div>
-                        <a href="../post/details/@post.Id" class="btn btn-primary btn-sm pull-right">Read More</a>
-                    </div>
-                </div>
-            }
-        </div>
+
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-4">
+        <h2>All Posts</h2>
+    </div>
+    <div class=" col-xs-offset-6 col-xs-2">
+        @{
+            if (User.IsInRole(RoleName.CanManagePosts))
+            {
+                @(Html.ActionLink<PostController>("Add new post", p => p.Create(), null, new { @class = "btn btn-primary pull-right", id = "createPost" }))
+            }
+        }
+    </div>
+</div>
+
+@foreach (var post in Model.OrderByDescending(date => date.CreatedOn))
+{
+    <div class="well">
+        <div class="media">
+            <a class="pull-left" href="/post/details/@post.Id">
+                <img class="postImage" src="@post.ImagePath">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="/post/details/@post.Id" class="text-success">@post.Title</a></h4>
+                <p class="text-right">By @post.AuthorUserName</p>
+                <p>
+                    @Html.Raw(post.Description)
+                </p>
+                <ul class="list-inline list-unstyled">
+                    <li><span><i class="glyphicon glyphicon-calendar"></i> @post.CreatedOn.ToLongDateString() </span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row panel panel-primary">
+            <div class="col-sm-12 panel-heading">
+                <h3 class="panel-title">@post.Title</h3>
+            </div>
+            <div class="row panel-body">
+                <div class="col-md-2">
+                    <img src="@post.ImagePath" alt="Post image" class="img-rounded postImage">
+                </div>
+                <div class="col-md-10">@Html.Raw(post.Description)</div>
+                <div class="row">
+                    <div class="col-md-12">@(Html.ActionLink<PostController>("Read Full article", c=>c.Details(post.Id), null, new {@class="btn btn-sm btn-primary pull-right"}))</div>
+                </div>
+            </div>
+        </div>*@
+
+}

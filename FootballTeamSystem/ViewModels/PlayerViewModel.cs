@@ -12,22 +12,21 @@
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "Име и фамилия")]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "Дата на раждане")]
+        [Display(Name = "Date of birth")]
         public DateTime Birthdate { get; set; }
 
         [Required]
         [Range(1,99)]
-        [Display(Name = "Номер на фланелка")]
+        [Display(Name = "Jersey number")]
         public byte ShirtNumber { get; set; }
 
         public string PlayerImagePath { get; set; }
 
         [Required]
-        [Display(Name = "Позиция")]
         public PlayerPositions Position { get; set; }
 
         public bool IsCaptain { get; set; }

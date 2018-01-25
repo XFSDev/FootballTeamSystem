@@ -1,4 +1,6 @@
 ﻿@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import url("//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans); 
 
 body {
     padding-top: 50px;
@@ -27,9 +29,27 @@ body {
     margin: 20px;
 }
 
+.thumbnail {
+    min-width: 550px;
+    min-height: 370px;
+}
+
 .postImage {
     max-width: 150px;
     max-height: 150px;
+    margin: 0 auto;
+   
+   
+}
+.homePostImage {
+    padding-top: 5px;
+    max-width: 550px;
+    max-height: 370px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .postDescription {
@@ -60,7 +80,9 @@ body {
 
 .carousel-inner img {
     width: 100%;
-    max-height: 460px
+    max-height: 460px;
+    overflow: scroll;
+
 }
 
 .carousel-control {
@@ -116,10 +138,12 @@ body {
 /* Carousel Header Styles */
 .header-text {
     position: absolute;
-    top: 50%;
+    top: 65%;
     color: #fff;
     background-color:  rgba(0,0,0, 0.3);
+    width: 100%;
 }
+
 
 .header-text h2 {
     font-size: 40px;
@@ -157,3 +181,38 @@ body {
     padding-top: 15%;
     background-color: #000000;
 }
+
+.featured-post-title {
+    color: #dddddd;
+}
+
+.featured-post-title:hover {
+    color: #cccccc;
+    cursor: pointer;
+    text-decoration: none;
+}
+/**HomePage Posts*/
+body {
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+a, p, h2{text-decoration:none;}
+
+/* PANEL */
+.left-panel .panel-default{border-bottom-left-radius:7px; border-bottom-right-radius:7px; border-bottom:2px #DDD solid;}
+.left-panel .panel-default .panel-body {padding:0; margin:0;}
+.left-panel .panel-default .panel-body .col-md-12{margin:0; padding:0;}
+.left-panel .panel-default .panel-body .thumbnail{border:none; margin:0; padding:0; position:relative;}
+.left-panel .panel:hover img {opacity:.8;}
+.left-panel .panel-default .panel-body .icerik-bilgi{margin:30px;}
+.icerik-bilgi .btn-primary{float:right; margin-bottom:30px;}
+.icerik-bilgi h2{margin-bottom:30px; color:#333;}
+.icerik-bilgi h2:hover{color:#55ACEE; text-decoration:none;}
+.icerik-bilgi a:hover{text-decoration:none;}
+.icerik-bilgi p{margin-bottom:30px; line-height:25px; font-size:16px;}
+.icerik-bilgi .btn-group{float:left;}
+.btn-group a{font-size:26px; color:#CCC;}
+.btn-group .btn-facebook:hover{color:#3B5998;}
+.btn-group .btn-twitter:hover{color:#55ACEE;}
+.btn-group .btn-google:hover{color:#DD4B39;}

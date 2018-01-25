@@ -1,10 +1,12 @@
 ﻿namespace FootballTeamSystem.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
     using FootballTeamSystem.Data;
+    using ViewModels;
     using ViewModels.Post;
 
     [AllowAnonymous]
@@ -13,14 +15,33 @@
         public HomeController(IFootballSystemData footballSystemData)
             : base(footballSystemData)
         {
-         
+
         }
 
         public ActionResult Index()
         {
-            var posts = Data.Posts.All.ProjectTo<ListPostViewModel>();
-            
-            return this.View(posts);
+           
+
+            var featuredPost = Data.Posts
+                .All
+                .Where(f => f.IsFeaturedPost)
+                .OrderByDescending(d => d.CreatedOn)
+                .ProjectTo<ListPostViewModel>()
+                .First();
+
+            var posts = Data.Posts.All
+                .OrderByDescending(p => p.CreatedOn)
+                .ProjectTo<ListPostViewModel>()
+                .Take(6)
+                .ToList();
+
+            var viewModel = new HomeViewModel
+            {
+                FeaturedPost = featuredPost,
+                Posts = posts
+            };
+
+            return this.View(viewModel);
         }
 
 

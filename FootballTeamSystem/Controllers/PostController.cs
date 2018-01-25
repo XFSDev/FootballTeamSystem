@@ -16,18 +16,18 @@
     public class PostController : Controller
     {
 
-        private readonly IPostService postService;
+        private readonly IPostService _postService;
 
         public PostController(IPostService postService)
         {
-            this.postService = postService;
+            this._postService = postService;
         }
 
         [Route("posts")]
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var posts = postService.GetPosts().ProjectTo<ListPostViewModel>();
+            var posts = _postService.GetPosts().ProjectTo<ListPostViewModel>();
 
             return View(posts);
         }
@@ -44,7 +44,7 @@
         {
             if (ModelState.IsValid)
             {
-                postService.AddPost(Mapper.Map<Post>(post), post.UploadedImage);
+                _postService.AddPost(Mapper.Map<Post>(post), post.UploadedImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
@@ -56,7 +56,7 @@
         [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
-            var post = postService.GetPostById(id);
+            var post = _postService.GetPostById(id);
 
             if (post == null)
             {
@@ -70,7 +70,7 @@
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var post = postService.GetPostById(id);
+            var post = _postService.GetPostById(id);
 
             if (post == null)
                 return HttpNotFound();
@@ -84,7 +84,7 @@
         {
             if (ModelState.IsValid)
             {
-                var postToUpdate = postService.GetPostById(model.Id);
+                var postToUpdate = _postService.GetPostById(model.Id);
 
                 if (postToUpdate == null)
                 {
@@ -95,7 +95,7 @@
                 postToUpdate.Content = model.Content;
                 postToUpdate.IsFeaturedPost = model.IsFeaturedPost;
 
-                postService.UpdatePost(postToUpdate, model.UploadedImage);
+                _postService.UpdatePost(postToUpdate, model.UploadedImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
@@ -106,7 +106,7 @@
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            var post = postService.GetPostById(id);
+            var post = _postService.GetPostById(id);
 
             if (post == null)
             {
@@ -120,7 +120,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Delete(DeletePostViewModel model)
         {
-            var isDeleted = postService.DeletePost(model.Id);
+            var isDeleted = _postService.DeletePost(model.Id);
 
             if (isDeleted == false)
             {

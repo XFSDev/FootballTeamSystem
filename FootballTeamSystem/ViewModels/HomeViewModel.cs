@@ -5,6 +5,7 @@
 
     public class HomeViewModel
     {
-        public IEnumerable<AddPostViewModel> Posts { get; set; }
+        public ListPostViewModel FeaturedPost { get; set; }
+        public IList<ListPostViewModel> Posts { get; set; }
     }
 }

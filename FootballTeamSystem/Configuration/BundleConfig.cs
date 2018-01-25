@@ -25,6 +25,7 @@ namespace FootballTeamSystem
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-spacelab.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/site.css"));
         }
     }

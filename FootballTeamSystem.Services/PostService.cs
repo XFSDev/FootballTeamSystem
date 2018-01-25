@@ -77,6 +77,15 @@
 
                 post.ImagePath = uploadPath;
             }
+            else
+            {
+                if (post.ImagePath == null)
+                {
+                    var defaultPostImage = "/Content/Images/footballTeamSystem-noPostImage.png";
+                    post.ImagePath = defaultPostImage;
+                }
+            }
+
         }
 
        

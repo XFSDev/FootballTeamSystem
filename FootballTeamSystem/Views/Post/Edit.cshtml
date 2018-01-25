@@ -18,41 +18,44 @@
     {
         @Html.AntiForgeryToken()
 
+    <div class="form-group">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", id = "postTextArea" })
+            @Html.ValidationMessageFor(m => m.Content)
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Title)
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Title)
-            </div>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.IsFeaturedPost) На фокус
+            </label>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Content)
-                @Html.TextAreaFor(m => m.Content, new { @class = "form-control", id = "postTextArea" })
-                @Html.ValidationMessageFor(m => m.Content)
-            </div>
+        <div class="form-group">
+            <label for="currentImage">Current Post Image</label>
+            <img src="@Model.ImagePath" id="currentImage" class="img-responsive postImage">
+        </div>
+        <div class="form-group">
+            @Html.Label("UploadedImage", "Изображение", new { @class = "" })
+            @Html.TextBox("UploadedImage", null, new { type = "file", @class = "" })
+            <p class="help-block">Позволени формати: jpeg, jpg, png.</p>
+        </div>
 
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.IsFeaturedPost) На фокус
-                </label>
-            </div>
-
-
-            <div class="form-group">
-                @Html.Label("UploadedImage", "Изображение", new { @class = "" })
-                @Html.TextBox("UploadedImage", null, new { type = "file", @class = "" })
-                <p class="help-block">Позволени формати: jpeg, jpg, png.</p>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-block btn-default btn-sm">Запази промените</button>
-                </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-block btn-default btn-sm">Запази промените</button>
             </div>
         </div>
+    </div>
     }
 </div>
 

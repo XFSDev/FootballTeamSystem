@@ -10,6 +10,7 @@
     public class EditPostViewModel : AddPostViewModel, IMapFrom<Post>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
+        public string ImagePath { get; set; }
 
         public new void CreateMappings(IMapperConfigurationExpression configuration)
         {
