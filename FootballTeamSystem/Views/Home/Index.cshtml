@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FootballTeamSystem.Models.PostViewModel>
+﻿@model IEnumerable<FootballTeamSystem.ViewModels.Post.ListPostViewModel>
 
 @{
 
@@ -6,7 +6,7 @@
 }
 <div class="row">
     <!-- Carousel -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    @*<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -17,9 +17,9 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Static Header -->
-                @foreach (var featuredPost in Model.Where(p => p.IsFeaturedPost).Take(1))
+                @foreach (var featuredPost in Model.Where(fp=> fp.IsFeaturedPost))
                 {
-                    <img src="@featuredPost.ImagePath" alt="First slide">
+                    <img src="@featuredPost.UploadedImage" alt="First slide">
 
                     <div class="header-text hidden-xs">
                         <div class="col-md-12">
@@ -38,7 +38,7 @@
         <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
-    </div><!-- /carousel -->
+    </div><!-- /carousel -->*@
 </div>
 <hr />
 <div class="row">
@@ -49,7 +49,7 @@
             <h3>@post.Title</h3>
             <h5>@post.CreatedOn.ToLongDateString()</h5>
             <p>@Html.Raw(post.Description)</p>
-            <p><a class="btn btn-default" href="../post/details/@post.Id">Прочети &raquo;</a></p>
+            <p><a class="btn btn-default" href="../post/details/@post.Id">Read more &raquo;</a></p>
         </div>
     }
 </div>
@@ -60,7 +60,7 @@
             <h3>@post.Title</h3>
             <h5>@post.CreatedOn.ToLongDateString()</h5>
             <p>@Html.Raw(post.Description)</p>
-            <p><a class="btn btn-default" href="../post/details/@post.Id">Прочети &raquo;</a></p>
+            <p><a class="btn btn-default" href="../post/details/@post.Id">Read more &raquo;</a></p>
         </div>
     }
 </div>

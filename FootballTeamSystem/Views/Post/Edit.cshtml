@@ -1,4 +1,5 @@
-﻿@model FootballTeamSystem.Models.PostViewModel
+﻿@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.Post.EditPostViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -13,7 +14,7 @@
     <h2>Редактиране на публикация.</h2>
     <hr />
 
-    @using (Html.BeginForm("Edit", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(Views.Edit, Controllers.Post, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -41,8 +42,8 @@
 
 
             <div class="form-group">
-                @Html.Label("image", "Изображение", new { @class = "" })
-                @Html.TextBox("image", null, new { type = "file", @class = "" })
+                @Html.Label("UploadedImage", "Изображение", new { @class = "" })
+                @Html.TextBox("UploadedImage", null, new { type = "file", @class = "" })
                 <p class="help-block">Позволени формати: jpeg, jpg, png.</p>
             </div>
 

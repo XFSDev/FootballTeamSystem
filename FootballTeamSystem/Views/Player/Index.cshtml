@@ -1,5 +1,6 @@
-﻿@using FootballTeamSystem.Data.Model
-@model IEnumerable<FootballTeamSystem.Models.PlayerViewModel>
+﻿@using FootballTeamSystem.Controllers
+@using FootballTeamSystem.Infrastructure.Constants
+@model IEnumerable<FootballTeamSystem.ViewModels.PlayerViewModel>
 
 @{
     ViewBag.Title = "All Players";
@@ -8,16 +9,16 @@
 <div class="container-fluid">
     <div class="row">
         <ul class="breadcrumb">
-            <li><a href="/">Начало</a></li>
-            <li class="active">Състезатели</li>
+            <li><a href="/">Home</a></li>
+            <li class="active">Players</li>
         </ul>
     </div>
     <div class="row">
-        <h2>Състезатели</h2>
+        <h2>Players</h2>
         @{
             if (User.IsInRole(RoleName.CanManagePlayers))
             {
-                @Html.ActionLink("Добави нов", "Add", null, new { @class = "btn btn-primary pull-right", id = "createPlayer" })
+                @(Html.ActionLink<PlayerController>("Add new player", p => p.Add(), null, new { @class = "btn btn-sm btn-primary  pull-right", id = "createPlayer" }))
             }
         }
     </div>
@@ -29,10 +30,7 @@
                     <th>Position</th>
                     <th>Player Names</th>
                     <th>Player Birtdate</th>
-                    @if (User.IsInRole(RoleName.CanManagePlayers))
-                    {
-                        <th>Actions</th>
-                    }
+                    <th>Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,10 +41,11 @@
                         <td>@player.Position</td>
                         <td>@player.FullName</td>
                         <td>@player.Birthdate.ToLongDateString()</td>
+                        <td>@(Html.ActionLink<PlayerController>("Details", c => c.Details(player.Id),null, new { @class = "btn btn-sm btn-default" }))</td>
                         @if (User.IsInRole(RoleName.CanManagePlayers))
                         {
-                            <td>@Html.ActionLink("Edit", "Edit", new {id = player.Id}, new {@class="btn btn-info"})</td>
-                            <td>@Html.ActionLink("Delete", "Delete", new {id = player.Id}, new{@class="btn btn-danger"})</td>
+                            <td>@(Html.ActionLink<PlayerController>("Edit", c => c.Edit(player.Id), null, new {@class="btn btn-info btn-sm"}))</td>
+                            <td>@(Html.ActionLink<PlayerController>("Delete", c => c.Delete(player.Id), null, new{@class= "btn btn-danger btn-sm" }))</td>
                         }
                     </tr>
                 }

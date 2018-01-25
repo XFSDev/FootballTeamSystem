@@ -1,10 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using FootballTeamSystem.Data.Model.Contracts;
-
-namespace FootballTeamSystem.Data.Model.Abstraction
+﻿namespace FootballTeamSystem.Data.Model.Abstraction
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using FootballTeamSystem.Data.Model.Contracts;
+
     public abstract class DataModel: IAuditable, IDeletable
     {
         protected DataModel()

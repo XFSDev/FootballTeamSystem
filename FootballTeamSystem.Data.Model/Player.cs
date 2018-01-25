@@ -5,11 +5,13 @@
     using System.IO;
     using System.Linq;
     using System.Web;
+
     using Abstraction;
 
     public class Player : DataModel
     {
         [Required]
+        [StringLength(50)]
         public string FullName { get; set; }
 
         [Required]

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballTeamSystem.Web", "FootballTeamSystem\FootballTeamSystem.Web.csproj", "{B8A7AE89-1EA5-4F8F-8F89-7B123F90B46C}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballTeamSystem.Data.Model", "FootballTeamSystem.Data.Model\FootballTeamSystem.Data.Model.csproj", "{C2D487CA-9E2E-4E83-B771-F3D858B621D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2A75C6DE-4889-4906-825F-57E253DC94F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballTeamSystem.Services", "FootballTeamSystem.Services\FootballTeamSystem.Services.csproj", "{7B7B569A-EE2E-4D10-86E2-8BC6E778454D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{C2D487CA-9E2E-4E83-B771-F3D858B621D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2D487CA-9E2E-4E83-B771-F3D858B621D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2D487CA-9E2E-4E83-B771-F3D858B621D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B7B569A-EE2E-4D10-86E2-8BC6E778454D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7B569A-EE2E-4D10-86E2-8BC6E778454D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7B569A-EE2E-4D10-86E2-8BC6E778454D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7B569A-EE2E-4D10-86E2-8BC6E778454D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

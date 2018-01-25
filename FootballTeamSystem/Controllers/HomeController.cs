@@ -1,31 +1,29 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using AutoMapper;
-using FootballTeamSystem.Data;
-using FootballTeamSystem.Data.Model;
-using FootballTeamSystem.Models;
-
-namespace FootballTeamSystem.Controllers
+﻿namespace FootballTeamSystem.Controllers
 {
+    using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
+
+    using FootballTeamSystem.Data;
+    using ViewModels.Post;
 
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly IData _data;
-
-        public HomeController(IData data)
+        public HomeController(IFootballSystemData footballSystemData)
+            : base(footballSystemData)
         {
-            this._data = data;
+         
         }
+
         public ActionResult Index()
         {
-            var posts = _data.Posts.GetAllPosts().Select(Mapper.Map<Post,PostViewModel>);
+            var posts = Data.Posts.All.ProjectTo<ListPostViewModel>();
             
             return this.View(posts);
         }
 
 
-        [Authorize(Roles = "CanManagePosts")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using AutoMapper;
-
-namespace FootballTeamSystem
+﻿namespace FootballTeamSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using AutoMapper;
+    using Infrastructure.Mapping;
+
     public class MapperConfig
     {
 

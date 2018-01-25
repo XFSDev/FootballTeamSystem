@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-
-namespace FootballTeamSystem
+﻿namespace FootballTeamSystem.Infrastructure.Mapping
 {
+    using AutoMapper;
+
     public class MapServices : IMapServices
     {
         public T Map<T>(object source)

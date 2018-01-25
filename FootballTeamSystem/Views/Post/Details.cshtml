@@ -1,5 +1,6 @@
-﻿@using FootballTeamSystem.Data.Model
-@model FootballTeamSystem.Models.PostViewModel
+﻿@using FootballTeamSystem.Controllers
+@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.Post.ListPostViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,28 +10,28 @@
 <div class="container">
     <div class="row">
         <ul class="breadcrumb">
-            <li><a href="/">Начало</a></li>
-            <li><a href="/posts/">Публикации</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
             <li class="active">@Model.Title</li>
         </ul>
         <div class="col-md-10">
             <h2> @Model.Title</h2>
-           
+
         </div>
         <div class="col-md-2" id="actionBtns">
             @{
                 if (User.IsInRole(RoleName.CanManagePosts))
                 {
-                    @Html.ActionLink("Редактирай", "Edit",new {id = Model.Id}, new { @class = "btn btn-primary btn-sm pull-right", id = "editPost" })
+                    @(Html.ActionLink<PostController>("Edit Post", c => c.Edit(Model.Id), null, new { @class = "btn btn-primary btn-sm pull-right", id = "editPost" }))
                 }
             }
         </div>
         <div class="col-md-12">
-            <p>Posted by @Model.Author.Email <span class="pull-right"><em> @Model.CreatedOn.ToLongDateString()</em></span> </p>
+            <p>Posted by @Model.AuthorUserName <span class="pull-right"><em> @Model.CreatedOn.ToLongDateString()</em></span> </p>
         </div>
     </div>
     <div class="row">
-        <img src="@Model.ImagePath" class="img-responsive img-thumbnail pull-left postImage-details">
+        <img src="@Model.ImagePath" alt="Post Image" class="img-responsive img-thumbnail pull-left postImage-details">
         <p class="body-content text-justify"> @Html.Raw(Model.Content)  </p>
     </div>
     <div class="row">
@@ -38,7 +39,7 @@
             @{
                 if (User.IsInRole(RoleName.CanManagePosts))
                 {
-                    @Html.ActionLink("Изтрий", "Delete", new {id = Model.Id}, new  {@class="btn btn-danger btn-sm", id = "deletePost"})
+                    @(Html.ActionLink<PostController>("Delete Post", c => c.Delete(Model.Id), null, new { @class = "btn btn-danger btn-sm", id = "deletePost" }))
                 }
             }
         </div>

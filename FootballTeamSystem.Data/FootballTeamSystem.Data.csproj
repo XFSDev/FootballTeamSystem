@@ -56,8 +56,8 @@
   <ItemGroup>
     <Compile Include="Contracts\IEfRepository.cs" />
     <Compile Include="Contracts\IPostRepository.cs" />
-    <Compile Include="Data.cs" />
-    <Compile Include="IData.cs" />
+    <Compile Include="FootballSystemData.cs" />
+    <Compile Include="IFootballSystemData.cs" />
     <Compile Include="Migrations\201801081056169_Initialize.cs" />
     <Compile Include="Migrations\201801081056169_Initialize.Designer.cs">
       <DependentUpon>201801081056169_Initialize.cs</DependentUpon>
@@ -70,10 +70,12 @@
     <Compile Include="Migrations\201801201045049_UpdatePlayerModel.Designer.cs">
       <DependentUpon>201801201045049_UpdatePlayerModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801231138101_UpdatePlayerDataModel.cs" />
+    <Compile Include="Migrations\201801231138101_UpdatePlayerDataModel.Designer.cs">
+      <DependentUpon>201801231138101_UpdatePlayerDataModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Contracts\IPlayerRepository.cs" />
-    <Compile Include="Repositories\PlayerRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="IMsSqlDbContext.cs" />
     <Compile Include="MsSqlDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801201045049_UpdatePlayerModel.resx">
       <DependentUpon>201801201045049_UpdatePlayerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801231138101_UpdatePlayerDataModel.resx">
+      <DependentUpon>201801231138101_UpdatePlayerDataModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using FootballTeamSystem.Data.Contracts;
-using FootballTeamSystem.Data.Model;
-using FootballTeamSystem.Data.Model.Contracts;
-using FootballTeamSystem.Data.Repositories;
-
-namespace FootballTeamSystem.Data
+﻿namespace FootballTeamSystem.Data
 {
-    public class Data : IData
+    using System;
+    using System.Collections.Generic;
+
+    using FootballTeamSystem.Data.Contracts;
+    using FootballTeamSystem.Data.Model;
+    using FootballTeamSystem.Data.Model.Contracts;
+    using FootballTeamSystem.Data.Repositories;
+
+    public class FootballSystemData : IFootballSystemData
     {
         private readonly IMsSqlDbContext _context;
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
 
-        public Data() : this(new MsSqlDbContext())
+        public FootballSystemData() : this(new MsSqlDbContext())
         {
 
         }
 
-        public Data(IMsSqlDbContext context)
+        public FootballSystemData(IMsSqlDbContext context)
         {
             this._context = context;
         }
 
-        public IPostRepository Posts => (IPostRepository)this.GetRepository<Post>();
-        public IPlayerRepository Players => (IPlayerRepository)this.GetRepository<Player>();
+        public IEfRepository<Post> Posts => this.GetRepository<Post>();
+        public IEfRepository<Player> Players => this.GetRepository<Player>();
 
 
         public IMsSqlDbContext Context => this._context;
@@ -36,15 +37,15 @@ namespace FootballTeamSystem.Data
             {
                 var type = typeof(EfRepository<T>);
 
-                if (typeof(T).IsAssignableFrom(typeof(Post)))
-                {
-                    type = typeof(PostRepository);
-                }
+                //if (typeof(T).IsAssignableFrom(typeof(Post)))
+                //{
+                //    type = typeof(PostRepository);
+                //}
 
-                if (typeof(T).IsAssignableFrom(typeof(Player)))
-                {
-                    type = typeof(PlayerRepository);
-                }
+                //if (typeof(T).IsAssignableFrom(typeof(Player)))
+                //{
+                //    type = typeof(PlayerRepository);
+                //}
 
                 this._repositories.Add(typeof(T), Activator.CreateInstance(type, this._context));
             }

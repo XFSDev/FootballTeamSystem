@@ -1,4 +1,4 @@
-﻿namespace FootballTeamSystem
+﻿namespace FootballTeamSystem.Infrastructure.Mapping
 {
     public interface IMapServices
     {

@@ -1,4 +1,5 @@
-﻿@model FootballTeamSystem.Models.PostViewModel
+﻿@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.Post.AddPostViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,21 +7,20 @@
 
 <div class="row">
     <ul class="breadcrumb">
-        <li><a href="/">Начало</a></li>
-        <li><a href="/posts/">Публикации</a></li>
-        <li class="active">Нова</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/posts/">Posts</a></li>
+        <li class="active">New</li>
     </ul>
-    <h2>Създаване на нова публикация.</h2>
+    <h2>Create new post.</h2>
     <hr />
 
-    @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(Views.Create, Controllers.Post, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-group">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
             <div class="form-group">
                 @Html.LabelFor(m => m.Title)
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
@@ -35,20 +35,20 @@
 
             <div class="checkbox">
                 <label>
-                    @Html.CheckBoxFor(m => m.IsFeaturedPost) На фокус
+                    @Html.CheckBoxFor(m => m.IsFeaturedPost) Featured post
                 </label>
             </div>
 
 
             <div class="form-group">
-                @Html.Label("image", "Изображение", new { @class = "" })
-                @Html.TextBox("image", null, new { type = "file", @class = "" })
-                <p class="help-block">Позволени формати: jpeg, jpg, png.</p>
+                @Html.Label("UploadedImage", "Cover Image", new { @class = "" })
+                @Html.TextBox("UploadedImage", null, new { type = "file", @class = "" })
+                <p class="help-block">Allowed formats: jpeg, jpg, png.</p>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-block btn-default">Създай статия</button>
+                    <button type="submit" class="btn btn-block btn-default">Create new post</button>
                 </div>
             </div>
         </div>

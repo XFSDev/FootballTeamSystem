@@ -1,9 +1,11 @@
-﻿namespace FootballTeamSystem.Models
+﻿namespace FootballTeamSystem.ViewModels
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
     using Data.Model;
+    using Infrastructure.Mapping;
 
     public class PlayerViewModel: IMapFrom<Player>, IHaveCustomMappings
     {

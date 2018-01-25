@@ -1,4 +1,5 @@
-﻿@model FootballTeamSystem.Models.PostViewModel
+﻿@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.Post.DeletePostViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -13,7 +14,7 @@
     <h2>Изтриване на публикация.</h2>
     <hr />
 
-    @using (Html.BeginForm("Delete", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(Views.Delete, Controllers.Post, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -22,15 +23,15 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger disabled" })
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Title)
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", disabled = "" })
-                @Html.ValidationMessageFor(m => m.Title)
+                @Html.LabelFor(m => m.PostTitle)
+                @Html.TextBoxFor(m => m.PostTitle, new { @class = "form-control", disabled = "" })
+                @Html.ValidationMessageFor(m => m.PostTitle)
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Content)
-                @Html.TextAreaFor(m => m.Content, new { @class = "form-control", id = "postTextArea", disabled = "" })
-                @Html.ValidationMessageFor(m => m.Content)
+                @Html.LabelFor(m => m.PostContent)
+                @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", id = "postTextArea", disabled = "" })
+                @Html.ValidationMessageFor(m => m.PostContent)
             </div>
 
             <div class="form-group">

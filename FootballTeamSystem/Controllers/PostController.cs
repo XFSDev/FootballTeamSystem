@@ -1,29 +1,33 @@
-﻿using System;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AutoMapper;
-using FootballTeamSystem.Data;
-using FootballTeamSystem.Data.Model;
-using FootballTeamSystem.Models;
-
-namespace FootballTeamSystem.Controllers
+﻿namespace FootballTeamSystem.Controllers
 {
-    [Authorize]
+    using System;
+    using System.Web.Mvc;
+    using System.Web.Mvc.Expressions;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
+    using FootballTeamSystem.Data.Model;
+    using FootballTeamSystem.ViewModels.Post;
+    using FootballTeamSystem.Infrastructure.Constants;
+    using FootballTeamSystem.Services.Contracts;
+
+    [Authorize(Roles = RoleName.CanManagePosts)]
     public class PostController : Controller
     {
-        private readonly IData _data;
 
-        public PostController(IData data)
+        private readonly IPostService postService;
+
+        public PostController(IPostService postService)
         {
-            this._data = data;
+            this.postService = postService;
         }
 
         [Route("posts")]
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var posts = _data.Posts.GetAllPosts().Select(Mapper.Map<Post, PostViewModel>);
+            var posts = postService.GetPosts().ProjectTo<ListPostViewModel>();
 
             return View(posts);
         }
@@ -36,27 +40,23 @@ namespace FootballTeamSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PostViewModel model, HttpPostedFileBase image)
+        public ActionResult Create(AddPostViewModel post)
         {
             if (ModelState.IsValid)
             {
-                var newPost = Mapper.Map<PostViewModel, Post>(model);
+                postService.AddPost(Mapper.Map<Post>(post), post.UploadedImage);
 
-
-                _data.Posts.Add(newPost, image);
-                _data.SaveCanges();
-
-                return View("Index");
+                return this.RedirectToAction(c => c.Index());
             }
 
-            return View("Create", model);
+            return View(Views.Create, post);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
-            var post = _data.Posts.GetPost(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
             {
@@ -64,76 +64,70 @@ namespace FootballTeamSystem.Controllers
             }
 
 
-            return this.View(Mapper.Map<Post, PostViewModel>(post));
+            return this.View(Mapper.Map<ListPostViewModel>(post));
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleName.CanManagePosts)]
         public ActionResult Edit(Guid id)
         {
-
-            var post = _data.Posts.GetPost(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
                 return HttpNotFound();
 
-            return this.View(Mapper.Map<Post, PostViewModel>(post));
+            return this.View(Mapper.Map<EditPostViewModel>(post));
         }
 
         [HttpPost]
-        [ValidateInput(true)]
-        public ActionResult Edit(PostViewModel model, HttpPostedFileBase image)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditPostViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var postToUpdate = _data.Posts.GetPost(model.Id);
+                var postToUpdate = postService.GetPostById(model.Id);
 
                 if (postToUpdate == null)
                 {
                     return HttpNotFound();
                 }
 
-
                 postToUpdate.Title = model.Title;
                 postToUpdate.Content = model.Content;
                 postToUpdate.IsFeaturedPost = model.IsFeaturedPost;
 
-                _data.Posts.Update(postToUpdate, image);
-                _data.SaveCanges();
+                postService.UpdatePost(postToUpdate, model.UploadedImage);
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction(c => c.Index());
             }
 
-            return this.View("Edit", model);
+            return this.View(Views.Edit, model);
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleName.CanManagePosts)]
         public ActionResult Delete(Guid id)
         {
-            var post = _data.Posts.GetPost(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
-                return HttpNotFound();
-
-            return this.View(Mapper.Map<Post, PostViewModel>(post));
-        }
-
-        [HttpPost]
-        [Authorize(Roles = RoleName.CanManagePosts)]
-        public ActionResult Delete(PostViewModel model)
-        {
-            var postForDelete = _data.Posts.GetPost(model.Id);
-
-            if (postForDelete == null)
             {
                 return HttpNotFound();
             }
 
-            _data.Posts.Delete(postForDelete);
-            _data.SaveCanges();
+            return this.View(Mapper.Map<Post, DeletePostViewModel>(post));
+        }
 
-            return RedirectToAction("Index");
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(DeletePostViewModel model)
+        {
+            var isDeleted = postService.DeletePost(model.Id);
+
+            if (isDeleted == false)
+            {
+                return HttpNotFound();
+            }
+
+            return this.RedirectToAction(c => c.Index());
         }
     }
 }

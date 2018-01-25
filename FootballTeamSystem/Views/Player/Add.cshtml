@@ -1,5 +1,6 @@
 ﻿@using FootballTeamSystem.Data.Model
-@model FootballTeamSystem.Models.PlayerViewModel
+@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.PlayerViewModel
 
 
 @{
@@ -9,7 +10,7 @@
 
 <h2>Add Player</h2>
 
-@using (Html.BeginForm("Add", "Player",FormMethod.Post, new {@class= "form-horizontal", enctype = "multipart/form-data" }))
+@using (Html.BeginForm(Views.Add, Controllers.Player, FormMethod.Post, new {@class= "form-horizontal", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

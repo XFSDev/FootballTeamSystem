@@ -1,5 +1,6 @@
-﻿@using FootballTeamSystem.Data.Model
-@model IEnumerable<FootballTeamSystem.Models.PostViewModel>
+﻿@using FootballTeamSystem.Controllers
+@using FootballTeamSystem.Infrastructure.Constants
+@model IEnumerable<FootballTeamSystem.ViewModels.Post.ListPostViewModel>
 @{
     ViewBag.Title = "Публикации";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,14 +9,14 @@
 <div class="container-fluid">
     <div class="row">
         <ul class="breadcrumb">
-            <li><a href="/">Начало</a></li>
-            <li class="active">Публикации</li>
+            <li><a href="/">Home</a></li>
+            <li class="active">Posts</li>
         </ul>
-        <h2 class="pull-left">Всички Публикации</h2>
+        <h2 class="pull-left">All</h2>
       @{
           if (User.IsInRole(RoleName.CanManagePosts))
           {
-              @Html.ActionLink("Създай нова публикация", "Create", null, new { @class = "btn btn-primary pull-right", id = "createPost" })
+              @(Html.ActionLink<PostController>("Add new post", p => p.Create(), null, new { @class = "btn btn-primary pull-right", id = "createPost" }))
           }
       }
     </div>
@@ -27,12 +28,12 @@
                     <div class="panel-heading">
                         <a href="../post/details/@post.Id">
                             <h3 class="panel-title">@post.Title</h3>
-                        </a><small class="">@post.Author.UserName</small>
+                        </a><small class="">@post.AuthorUserName</small>
                     </div>
                     <div class="panel-body">
-                        <img src="@post.ImagePath" class="img-responsive img-thumbnail pull-left postImage">
+                        <img src="@post.ImagePath" class="img-responsive img-thumbnail pull-left postImage" alt="Post image">
                         <div class="postDescription">@Html.Raw(post.Description)</div>
-                        <a href="../post/details/@post.Id" class="btn btn-primary btn-sm pull-right">Прочети още</a>
+                        <a href="../post/details/@post.Id" class="btn btn-primary btn-sm pull-right">Read More</a>
                     </div>
                 </div>
             }

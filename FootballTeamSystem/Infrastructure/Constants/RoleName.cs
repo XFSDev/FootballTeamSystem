@@ -1,4 +1,4 @@
-﻿namespace FootballTeamSystem.Data.Model
+﻿namespace FootballTeamSystem.Infrastructure.Constants
 {
     public class RoleName
     {

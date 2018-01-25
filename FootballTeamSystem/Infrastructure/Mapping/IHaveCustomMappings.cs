@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-
-namespace FootballTeamSystem
+﻿namespace FootballTeamSystem.Infrastructure.Mapping
 {
+    using AutoMapper;
+
     public interface IHaveCustomMappings
     {
         void CreateMappings(IMapperConfigurationExpression configuration);

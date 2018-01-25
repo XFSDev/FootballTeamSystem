@@ -61,7 +61,6 @@
     <Compile Include="PlayerPositions.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleName.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

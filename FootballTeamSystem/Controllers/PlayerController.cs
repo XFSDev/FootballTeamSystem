@@ -1,29 +1,32 @@
-﻿using System.Web.Mvc;
-
-namespace FootballTeamSystem.Controllers
+﻿namespace FootballTeamSystem.Controllers
 {
     using System;
-    using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Mvc.Expressions;
+
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
     using Data;
     using Data.Model;
-    using Models;
+    using Infrastructure.Constants;
+    using ViewModels;
 
-    public class PlayerController : Controller
+    [Authorize(Roles = RoleName.CanManagePlayers)]
+    public class PlayerController : BaseController
     {
-        private readonly IData _data;
-
-        public PlayerController(IData data)
+        public PlayerController(IFootballSystemData footballSystemData)
+            : base(footballSystemData)
         {
-            this._data = data;
         }
 
         [HttpGet]
         [Route("players")]
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            var players = _data.Players.GetPlayers().Select(Mapper.Map<Player,PlayerViewModel>).ToList();
+            var players = Data.Players.All.ProjectTo<PlayerViewModel>();
 
             return View(players);
         }
@@ -40,19 +43,20 @@ namespace FootballTeamSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _data.Players.Add(Mapper.Map<PlayerViewModel,Player>(player), playerImage);
-                _data.SaveCanges();
+                //TODO: Make this to add image to player
+                Data.Players.Add(Mapper.Map<PlayerViewModel,Player>(player));
+                Data.SaveCanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction(c => c.Index());
             }
 
-            return View("Add", player);
+            return View(Views.Add, player);
         }
 
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var playerToEdit = _data.Players.GetPlayer(id);
+            var playerToEdit = Data.Players.GetById(id);
 
             if (playerToEdit == null)
             {
@@ -68,7 +72,7 @@ namespace FootballTeamSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var player = _data.Players.GetPlayer(model.Id);
+                var player = Data.Players.GetById(model.Id);
 
                 player.FullName = model.FullName;
                 player.Birthdate = model.Birthdate;
@@ -78,19 +82,19 @@ namespace FootballTeamSystem.Controllers
                 player.IsViceCaptain = model.IsViceCaptain;
 
 
-                _data.Players.Update(player, playerImage);
-                _data.SaveCanges();
+               //TODO: Make this work! _footballSystemData.Players.Update(player, playerImage);
+                Data.SaveCanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction(c => c.Index());
             }
 
-            return this.View("Edit", model);
+            return this.View(Views.Edit, model);
         }
 
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            var playerToDelete = _data.Players.GetPlayer(id);
+            var playerToDelete = Data.Players.GetById(id);
 
             if (playerToDelete == null)
             {
@@ -104,17 +108,31 @@ namespace FootballTeamSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(PlayerViewModel model)
         {
-            var playerToDelete = _data.Players.GetPlayer(model.Id);
+            var playerToDelete = Data.Players.GetById(model.Id);
 
             if (playerToDelete == null)
             {
                 return HttpNotFound();
             }
 
-            _data.Players.Delete(playerToDelete);
-            _data.SaveCanges();
+             Data.Players.Delete(playerToDelete);
+             Data.SaveCanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction(c => c.Index());
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Details(Guid id)
+        {
+            var player = Data.Players.GetById(id);
+
+            if (player == null)
+            {
+                return HttpNotFound();
+            }
+
+            return this.View(Mapper.Map<PlayerViewModel>(player));
         }
     }
 }

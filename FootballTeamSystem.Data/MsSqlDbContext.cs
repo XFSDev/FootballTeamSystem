@@ -1,12 +1,14 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using FootballTeamSystem.Data.Model;
-using FootballTeamSystem.Data.Model.Contracts;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace FootballTeamSystem.Data
+﻿namespace FootballTeamSystem.Data
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    using FootballTeamSystem.Data.Model;
+    using FootballTeamSystem.Data.Model.Contracts;
+
     public class MsSqlDbContext : IdentityDbContext<User>, IMsSqlDbContext
     {
         public MsSqlDbContext()

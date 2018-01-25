@@ -6,15 +6,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Ф.К. Елит", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Football Team System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Начало", "Index", "Home")</li>
-                <li>@Html.ActionLink("Публикации", "Index", "Post")</li>
-                <li>@Html.ActionLink("Състезатели", "Index", "Player")</li>
-                <li>@Html.ActionLink("За Нас", "About", "Home")</li>
-                <li>@Html.ActionLink("Контакти", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Posts", "Index", "Post")</li>
+                <li>@Html.ActionLink("Players", "Index", "Player")</li>
+                <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
             </ul>
             @Html.Partial("_LoginPartial")
             </div>

@@ -1,8 +1,4 @@
-﻿
-using FootballTeamSystem;
-using FootballTeamSystem.Data.Contracts;
-using FootballTeamSystem.Data.Repositories;
-using Ninject.Web.Common.WebHost;
+﻿using FootballTeamSystem;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -14,11 +10,18 @@ namespace FootballTeamSystem
     using System.Data.Entity;
     using System.Web;
     using Data;
+
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Extensions.Conventions;
+
+    using FootballTeamSystem;
+    using FootballTeamSystem.Data.Contracts;
+    using FootballTeamSystem.Data.Repositories;
+    using Ninject.Web.Common.WebHost;
+    using Services.Contracts;
 
     public static class NinjectWebCommon
     {
@@ -77,10 +80,18 @@ namespace FootballTeamSystem
                     .BindDefaultInterface();
             });
 
+            kernel.Bind(x =>
+            {
+                x.FromAssemblyContaining<IService>()
+                    .SelectAllClasses()
+                    .BindDefaultInterface()
+                    .Configure(b => b.InRequestScope());
+            });
+
 
             kernel.Bind(typeof(DbContext), typeof(IMsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
-            kernel.Bind(typeof(IData)).To(typeof(Data.Data));
+            kernel.Bind(typeof(IFootballSystemData)).To(typeof(FootballSystemData));
         }
     }
 }

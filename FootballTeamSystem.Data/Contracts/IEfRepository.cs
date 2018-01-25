@@ -1,7 +1,8 @@
-﻿using System.Linq;
-
-namespace FootballTeamSystem.Data.Contracts
+﻿namespace FootballTeamSystem.Data.Contracts
 {
+    using System;
+    using System.Linq;
+
     public interface IEfRepository<T>
         where T : class
     {
@@ -10,6 +11,8 @@ namespace FootballTeamSystem.Data.Contracts
         IQueryable<T> AllAndDeleted { get; }
 
         void Add(T post);
+
+        T GetById(Guid id);
 
         void Delete(T entity);
 
