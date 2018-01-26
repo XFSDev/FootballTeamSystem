@@ -32,7 +32,6 @@
             var posts = Data.Posts.All
                 .OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ListPostViewModel>()
-                .Take(6)
                 .ToList();
 
             var viewModel = new HomeViewModel

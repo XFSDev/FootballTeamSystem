@@ -5,111 +5,55 @@
 
     ViewBag.Title = "Home Page";
 }
-<div class="row">
-    <!-- Carousel -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        @*<ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>*@
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <!-- Static Header -->
 
-                <img src="@Model.FeaturedPost.ImagePath" alt="Featured Post">
-
-                <div class="header-text hidden-xs">
-                    <div class="col-md-12">
-                        <h2>
-                            @(Html.ActionLink<PostController>(@Model.FeaturedPost.Title, p => p.Details(Model.FeaturedPost.Id), null, new { @class = "featured-post-title" }))
-                        </h2>
-                    </div>
-                </div><!-- /header-text -->
-            </div>
-        </div>
-        <!-- Controls -->
-        @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>*@
-    </div><!-- /carousel -->
-</div>
-<hr />
-
-@{var posts = Model.Posts.Count / 2 == 0 ? Model.Posts.Count : Model.Posts.Count / 2; }
-@for (int row = 1; row <= posts; row++)
-{
+<!-- Page Content -->
+<div class="container">
+    <!-- Heading Row -->
     <div class="row">
-        <div class="left-panel">
-            @for (int col = 0; col < 2; col++)
-            {
-                var currentPost = 2 * row + col;
-                if (currentPost == Model.Posts.Count)
-                {
-                    break;
-                }
-                <div class="col-xs-12 col-sm-6 col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <div class="thumbnail">
-                                    <img src="@Model.Posts[currentPost].ImagePath" alt="" class="img-responsive homePostImage img-rounded" />
-                                </div>
-                                <div class="icerik-bilgi">
-                                    <h2>@(Html.ActionLink<PostController>(Model.Posts[currentPost].Title, c=>c.Details(Model.Posts[currentPost].Id)))</h2>
-                                    <p>@Html.Raw(Model.Posts[currentPost].Description) [...]</p>
-                                    <div class="btn-group">
-                                        <a class="btn btn-facebook" href="#" data-toggle="tooltip" title="Share Facebook"><i class="fa fa-facebook"></i></a>
-                                        <a class="btn btn-twitter" href="#" data-toggle="tooltip" title="Share Twitter"><i class="fa fa-twitter"></i></a>
-                                        <a class="btn btn-google" href="#" data-toggle="tooltip" title="Share Google"><i class="fa fa-google"></i></a>
-                                    </div>
-                                        <a href="./post/details/@Model.Posts[currentPost].Id" class="btn btn-primary">
-                                            <span class="btn btn-sm btn-google">Read More <i class="fa fa-chevron-right"></i></span>
-                                        </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+        <div class="col-md-8">
+            <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
         </div>
+        <!-- /.col-md-8 -->
+        <div class="col-md-4">
+            <h1>Business Name or Tagline</h1>
+            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+            <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+        </div>
+        <!-- /.col-md-4 -->
     </div>
-
-}
-
-@*<div class="row">
-        <div class="left-panel">
-            <div class="col-xs-12 col-sm-6 col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <div class="thumbnail">
-                                <a href="#"><img src="http://www.istanbluegayrimenkul.com/wp-content/uploads/2014/05/image6.jpg" alt="" /></a>
-                            </div>
-                            <div class="icerik-bilgi">
-                                <a href="#"><h2>Lorem ipsum dolor sit amet</h2></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut condimentum eget nunc quis semper. Nunc pellentesque nec libero sed viverra. Donec turpis velit, suscipit sit amet mauris quis, viverra ornare massa. Morbi tellus eros, fringilla eu sodales id, ultricies ut sapien. Duis et tristique enim, vitae mattis neque. Aliquam efficitur, dui id laoreet blandit, lorem […]</p>
-                                <div class="btn-group">
-                                    <a class="btn btn-social btn-facebook" href="#" data-toggle="tooltip" title="Share Facebook"><i class="fa fa-facebook"></i></a>
-                                    <a class="btn btn-social btn-twitter" href="#" data-toggle="tooltip" title="Share Twitter"><i class="fa fa-twitter"></i></a>
-                                    <a class="btn btn-social btn-google" href="#" data-toggle="tooltip" title="Share Google"><i class="fa fa-google"></i></a>
-                                </div>
-                                <a href="#">
-                                    <span class="btn btn-google">Read More <i class="fa fa-chevron-right"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- /.row -->
+    <hr>
+    <!-- Call to Action Well -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well text-center">
+                This is a well that is a great spot for a business tagline or phone number for easy access!
             </div>
         </div>
-    </div>*@
-
-
-
-
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Heading 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+            <a class="btn btn-default" href="#">More Info</a>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4">
+            <h2>Heading 2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+            <a class="btn btn-default" href="#">More Info</a>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4">
+            <h2>Heading 3</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+            <a class="btn btn-default" href="#">More Info</a>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->

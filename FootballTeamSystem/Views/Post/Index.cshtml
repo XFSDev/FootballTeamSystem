@@ -17,7 +17,7 @@
 </div>
 <div class="row">
     <div class="col-xs-4">
-        <h2>All Posts</h2>
+        <h2>Latest Posts</h2>
     </div>
     <div class=" col-xs-offset-6 col-xs-2">
         @{
@@ -28,40 +28,95 @@
         }
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- list of posts -->
+            @foreach (var post in Model)
+            {
+                <article>
+                    <h2><a href="/post/details/@post.Id/">@post.Title</a></h2>
 
-@foreach (var post in Model.OrderByDescending(date => date.CreatedOn))
-{
-    <div class="well">
-        <div class="media">
-            <a class="pull-left" href="/post/details/@post.Id">
-                <img class="postImage" src="@post.ImagePath">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading"><a href="/post/details/@post.Id" class="text-success">@post.Title</a></h4>
-                <p class="text-right">By @post.AuthorUserName</p>
-                <p>
-                    @Html.Raw(post.Description)
+                    <div class="row">
+                        <div class="col-sm-8 col-md-8">
+                            <span class="glyphicon glyphicon-bookmark"></span> <a href="#">News</a>,
+                            <a href="#">Football</a>, <a href="#">Hot</a>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="glyphicon glyphicon-time"></span> @post.CreatedOn.ToLongDateString()
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <img src="@post.ImagePath" class="img-responsive homeListImage">
+
+                    <br />
+
+                    <p class="lead">@Html.Raw(post.Description) ...</p>
+
+                    <p class="text-right">
+                        <a href="/post/details/@post.Id/">
+                            continue reading...
+                        </a>
+                    </p>
+
+                    <hr>
+
+                </article>
+            }
+            <!-- pager -->
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#">← Older</a>
+                </li>
+                <li class="next">
+                    <a href="#">Newer →</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <!-- Subscribe to my feed widget -->
+            <div class="well text-center">
+                <p class="lead">
+                    Don't want to miss updates? Please click the below button!
                 </p>
-                <ul class="list-inline list-unstyled">
-                    <li><span><i class="glyphicon glyphicon-calendar"></i> @post.CreatedOn.ToLongDateString() </span></li>
+                <button class="btn btn-primary btn-lg">Subscribe to my feed</button>
+            </div>
+
+            <!-- Other widgets -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Lastest Hot News</h4>
+                </div>
+                <ul class="list-group">
+                    @foreach (var hotpost in Model.Where(p=>p.IsFeaturedPost).Take(6))
+                    {
+                        <li class="list-group-item">
+                            <a href="/post/details/@hotpost.Id">@hotpost.Title</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Recent Comments</h4>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#">I don't believe in astrology but still your writing style is really great! - <em>john</em></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">Wow.. what you said is really true! I'm an aries though - <em>Anto</em></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">Does capricorn and aries is compatibile? - <em>Sarah</em></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">I'm a cancer woman been in love with Leo. Will this work? - <em>Mary</em></a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-
-    @*<div class="row panel panel-primary">
-            <div class="col-sm-12 panel-heading">
-                <h3 class="panel-title">@post.Title</h3>
-            </div>
-            <div class="row panel-body">
-                <div class="col-md-2">
-                    <img src="@post.ImagePath" alt="Post image" class="img-rounded postImage">
-                </div>
-                <div class="col-md-10">@Html.Raw(post.Description)</div>
-                <div class="row">
-                    <div class="col-md-12">@(Html.ActionLink<PostController>("Read Full article", c=>c.Details(post.Id), null, new {@class="btn btn-sm btn-primary pull-right"}))</div>
-                </div>
-            </div>
-        </div>*@
-
-}
+</div>

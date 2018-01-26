@@ -81,7 +81,7 @@
             {
                 if (post.ImagePath == null)
                 {
-                    var defaultPostImage = "/Content/Images/footballTeamSystem-noPostImage.png";
+                    var defaultPostImage = "/Content/Images/footballTeamSystem-noPostImage.jpg";
                     post.ImagePath = defaultPostImage;
                 }
             }
