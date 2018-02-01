@@ -1,0 +1,20 @@
+﻿@using FootballTeamSystem.Data.Model
+@model FootballTeamSystem.ViewModels.Comment.PostCommentViewModel
+
+<div class="well">
+    <h4>Leave a comment</h4>
+    @using (Html.BeginForm("PostComment", "Comment", FormMethod.Post, new {@class= "clearfix" }))
+    {
+        @Html.AntiForgeryToken();
+
+        @Html.HiddenFor(c=> c.PostId)
+
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(c=>c.Content, new  {@class= "sr-only" })
+            @Html.TextAreaFor(c=>c.Content, new {@class= "form-control", placeholder = "Comment" })
+        </div>
+        <div class="col-md-12 form-group text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    }
+</div>

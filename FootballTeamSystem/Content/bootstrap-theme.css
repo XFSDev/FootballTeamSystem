@@ -61,14 +61,8 @@ a:hover, .btn-link:hover {
 .btn-primary {
     color: #ffffff;
     background-color: #52656B;
-    border: 0;
     padding: 8px 20px;
 }
-
-    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-        color: #52656B;
-        background-color: #CDFF00;
-    }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     color: #ffffff;
@@ -93,5 +87,6 @@ table a:not(.btn), .table a:not(.btn) {
 
     .form-control:focus {
         box-shadow: none;
-        border: 2px solid #FF8598;
+        border: 2px solid #5aa2f3;
+        ;
     }

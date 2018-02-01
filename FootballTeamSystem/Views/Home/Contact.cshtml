@@ -1,22 +1,31 @@
-﻿@{
+﻿@using FootballTeamSystem.Infrastructure.Constants
+@{
     ViewBag.Title = "Contact";
 }
 
 <div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Contact Us</li>
+            </ul>
+        </div>
+    </div>
     
-    <h1>Contact Me</h1>
- 
+
     <div class="well">
         <p class="lead">
             Do you have any question? Please use the below contact form and send a message. I'll reply you as quick as possible.
         </p>
     </div>
- 
+
     <!-- contact form -->
 
     <div class="contact-form">
-        <form class="form-horizontal col-md-8" role="form">
-
+        @using (@Html.BeginForm(Views.Contact, Controllers.Home, FormMethod.Post, new {@class = "form-horizontal col-md-8", role = "form"}))
+        {
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="name" class="col-md-2">Name</label>
                 <div class="col-md-10">
@@ -50,6 +59,6 @@
                     <button type="submit" class="btn btn-lg btn-primary">Submit your message!</button>
                 </div>
             </div>
-        </form>
+        }
     </div>
 </div>

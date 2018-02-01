@@ -20,6 +20,7 @@
 
         public virtual IDbSet<Post> Posts { get; set; }
         public virtual IDbSet<Player> Players { get; set; }
+        public virtual IDbSet<Comment> Comments { get; set; }
 
 
         public static MsSqlDbContext Create()

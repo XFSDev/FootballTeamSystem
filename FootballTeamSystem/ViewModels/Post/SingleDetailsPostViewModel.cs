@@ -1,15 +1,16 @@
 ﻿namespace FootballTeamSystem.ViewModels.Post
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     using AutoMapper;
-
+    using Comment;
     using Data.Model;
     using Infrastructure.Mapping;
 
-    public class ListPostViewModel: IMapFrom<Post>
+    public class SingleDetailsPostViewModel: IMapFrom<Post>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
 
@@ -31,5 +32,14 @@
         public bool IsFeaturedPost { get; set; }
 
         public string ImagePath { get; set; }
+
+        public ICollection<CommentViewModel> Comments { get; set; }
+
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            configuration.CreateMap<Post, SingleDetailsPostViewModel>()
+                .ForMember(m => m.AuthorUserName, opt => opt.MapFrom(m => m.Author.UserName))
+                .ReverseMap();
+        }
     }
 }

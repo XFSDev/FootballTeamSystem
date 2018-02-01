@@ -1,24 +1,26 @@
 ﻿namespace FootballTeamSystem.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
+    using Data;
     using FootballTeamSystem.Data.Model;
     using FootballTeamSystem.ViewModels.Post;
     using FootballTeamSystem.Infrastructure.Constants;
     using FootballTeamSystem.Services.Contracts;
+    using ViewModels.Comment;
 
     [Authorize(Roles = RoleName.CanManagePosts)]
-    public class PostController : Controller
+    public class PostController : BaseController
     {
-
         private readonly IPostService _postService;
 
-        public PostController(IPostService postService)
+        public PostController(IFootballSystemData data, IPostService postService) : base(data)
         {
             this._postService = postService;
         }
@@ -27,9 +29,15 @@
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var posts = _postService.GetPosts().ProjectTo<ListPostViewModel>();
+            var posts = _postService.GetPosts().ProjectTo<SingleDetailsPostViewModel>();
 
-            return View(posts);
+            var viewModel = new IndexPostViewModel
+            {
+                Posts = _postService.GetPosts().ProjectTo<SingleDetailsPostViewModel>(),
+                RecentComments = Data.Comments.All.OrderByDescending(c=> c.CreatedOn).Take(6).ProjectTo<IndexCommentViewModel>()
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -64,7 +72,7 @@
             }
 
 
-            return this.View(Mapper.Map<ListPostViewModel>(post));
+            return this.View(Mapper.Map<SingleDetailsPostViewModel>(post));
         }
 
         [HttpGet]

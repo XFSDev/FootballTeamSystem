@@ -26,6 +26,8 @@
 
         public IEfRepository<Post> Posts => this.GetRepository<Post>();
         public IEfRepository<Player> Players => this.GetRepository<Player>();
+        public IEfRepository<Comment> Comments => this.GetRepository<Comment>();
+        public IEfRepository<User> Users => this.GetRepository<User>();
 
 
         public IMsSqlDbContext Context => this._context;

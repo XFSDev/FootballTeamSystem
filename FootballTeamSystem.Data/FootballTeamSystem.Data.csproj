@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201801231138101_UpdatePlayerDataModel.Designer.cs">
       <DependentUpon>201801231138101_UpdatePlayerDataModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802011345025_AddCommentToDomainModel.cs" />
+    <Compile Include="Migrations\201802011345025_AddCommentToDomainModel.Designer.cs">
+      <DependentUpon>201802011345025_AddCommentToDomainModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Contracts\IPlayerRepository.cs" />
     <Compile Include="IMsSqlDbContext.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801231138101_UpdatePlayerDataModel.resx">
       <DependentUpon>201801231138101_UpdatePlayerDataModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011345025_AddCommentToDomainModel.resx">
+      <DependentUpon>201802011345025_AddCommentToDomainModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

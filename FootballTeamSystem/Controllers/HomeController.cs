@@ -21,39 +21,20 @@
         public ActionResult Index()
         {
            
-
-            var featuredPost = Data.Posts
-                .All
-                .Where(f => f.IsFeaturedPost)
-                .OrderByDescending(d => d.CreatedOn)
-                .ProjectTo<ListPostViewModel>()
-                .First();
-
-            var posts = Data.Posts.All
-                .OrderByDescending(p => p.CreatedOn)
-                .ProjectTo<ListPostViewModel>()
-                .ToList();
-
-            var viewModel = new HomeViewModel
-            {
-                FeaturedPost = featuredPost,
-                Posts = posts
-            };
-
-            return this.View(viewModel);
+            return this.View();
         }
 
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+           //TODO: Implement Timespan graph
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //TODO: Implement EmailSender()
 
             return View();
         }

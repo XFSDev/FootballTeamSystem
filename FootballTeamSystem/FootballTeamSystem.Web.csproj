@@ -218,6 +218,7 @@
     <Compile Include="Configuration\BundleConfig.cs" />
     <Compile Include="Configuration\FilterConfig.cs" />
     <Compile Include="Configuration\IdentityConfig.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Infrastructure\Constants\Controllers.cs" />
     <Compile Include="Infrastructure\Constants\Partials.cs" />
     <Compile Include="Infrastructure\Constants\RoleName.cs" />
@@ -245,6 +246,9 @@
     <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Comment\CommentViewModel.cs" />
+    <Compile Include="ViewModels\Comment\IndexCommentViewModel.cs" />
+    <Compile Include="ViewModels\Comment\PostCommentViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\Post\AddPostViewModel.cs" />
@@ -256,7 +260,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Post\DeletePostViewModel.cs" />
     <Compile Include="ViewModels\Post\EditPostViewModel.cs" />
-    <Compile Include="ViewModels\Post\ListPostViewModel.cs" />
+    <Compile Include="ViewModels\Post\IndexPostViewModel.cs" />
+    <Compile Include="ViewModels\Post\SingleDetailsPostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-spacelab.css" />
@@ -343,6 +348,8 @@
     <Content Include="Views\Player\Edit.cshtml" />
     <Content Include="Views\Player\Delete.cshtml" />
     <Content Include="Views\Player\Details.cshtml" />
+    <Content Include="Views\Post\_PostCommentPartial.cshtml" />
+    <Content Include="Views\Shared\_CommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

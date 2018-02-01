@@ -88,8 +88,6 @@
 
         }
 
-       
-
         private static void UpdatePostDescription(Post post)
         {
             post.Description = post.Content.Length <= 500 ? post.Content : post.Content.Substring(0, 500);

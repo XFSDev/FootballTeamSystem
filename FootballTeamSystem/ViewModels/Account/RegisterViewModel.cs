@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FootballTeamSystem.Models
+﻿namespace FootballTeamSystem.ViewModels.Account
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -14,6 +15,11 @@ namespace FootballTeamSystem.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+
+      [Required]
+      public string UserName { get; set; }
+
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]

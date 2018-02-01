@@ -1,0 +1,10 @@
+﻿@model FootballTeamSystem.ViewModels.Comment.CommentViewModel
+<li class="comment">
+    <div class="clearfix">
+        <h4 class="pull-left">@Model.AuthorName</h4>
+        <p class="pull-right">@Model.CreatedOn.ToLongDateString(), @Model.CreatedOn.ToLongTimeString()</p>
+    </div>
+    <p>
+        <em>@Model.Content</em>
+    </p>
+</li>

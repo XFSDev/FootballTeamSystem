@@ -9,6 +9,8 @@
     {
        IEfRepository<Post> Posts { get; }
        IEfRepository<Player> Players { get; }
+        IEfRepository<Comment> Comments { get; }
+        IEfRepository<User> Users { get; }
 
         IMsSqlDbContext Context { get; }
 

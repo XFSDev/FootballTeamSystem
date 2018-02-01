@@ -1,6 +1,6 @@
 ﻿@using FootballTeamSystem.Controllers
 @using FootballTeamSystem.Infrastructure.Constants
-@model IEnumerable<FootballTeamSystem.ViewModels.Post.ListPostViewModel>
+@model FootballTeamSystem.ViewModels.Post.IndexPostViewModel
 @{
     ViewBag.Title = "Posts";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +17,7 @@
 </div>
 <div class="row">
     <div class="col-xs-4">
-        <h2>Latest Posts</h2>
+        <h1>Latest Posts</h1>
     </div>
     <div class=" col-xs-offset-6 col-xs-2">
         @{
@@ -32,38 +32,45 @@
     <div class="row">
         <div class="col-md-8">
             <!-- list of posts -->
-            @foreach (var post in Model)
+            @if (Model.Posts.Any())
             {
-                <article>
-                    <h2><a href="/post/details/@post.Id/">@post.Title</a></h2>
+                foreach (var post in Model.Posts)
+                {
+                    <article>
+                        <h2><a href="/post/details/@post.Id/">@post.Title</a></h2>
 
-                    <div class="row">
-                        <div class="col-sm-8 col-md-8">
-                            <span class="glyphicon glyphicon-bookmark"></span> <a href="#">News</a>,
-                            <a href="#">Football</a>, <a href="#">Hot</a>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-8">
+                                <span class="glyphicon glyphicon-bookmark"></span> <a href="#">News</a>,
+                                <a href="#">Football</a>, <a href="#">Hot</a>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <span class="glyphicon glyphicon-time"></span> @post.CreatedOn.ToLongDateString()
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4">
-                            <span class="glyphicon glyphicon-time"></span> @post.CreatedOn.ToLongDateString()
-                        </div>
-                    </div>
 
-                    <hr>
+                        <hr>
 
-                    <img src="@post.ImagePath" class="img-responsive homeListImage">
+                        <img src="@post.ImagePath" class="img-responsive homeListImage">
 
-                    <br />
+                        <br />
 
-                    <p class="lead">@Html.Raw(post.Description) ...</p>
+                        <p class="lead">@Html.Raw(post.Description) ...</p>
 
-                    <p class="text-right">
-                        <a href="/post/details/@post.Id/">
-                            continue reading...
-                        </a>
-                    </p>
+                        <p class="text-right">
+                            <a href="/post/details/@post.Id/">
+                                continue reading...
+                            </a>
+                        </p>
 
-                    <hr>
+                        <hr>
 
-                </article>
+                    </article>
+                }
+            }
+            else
+            {
+                <h2>There is no posts yet.</h2>
             }
             <!-- pager -->
             <ul class="pager">
@@ -85,38 +92,38 @@
             </div>
 
             <!-- Other widgets -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Lastest Hot News</h4>
+            @if (Model.Posts.Any(t => t.IsFeaturedPost))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Lastest Hot News</h4>
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var hotpost in Model.Posts.Where(p => p.IsFeaturedPost).Take(6))
+                        {
+                            <li class="list-group-item">
+                                <a href="/post/details/@hotpost.Id">@hotpost.Title</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
-                <ul class="list-group">
-                    @foreach (var hotpost in Model.Where(p=>p.IsFeaturedPost).Take(6))
-                    {
-                        <li class="list-group-item">
-                            <a href="/post/details/@hotpost.Id">@hotpost.Title</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Recent Comments</h4>
+            }
+            @if (Model.RecentComments.Any())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Recent Comments</h4>
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var comment in Model.RecentComments)
+                        {
+                            <li class="list-group-item">
+                                <a href="/post/details/@comment.PostId">@comment.Content - <em>@comment.AuthorName</em></a>
+                            </li>
+                        }
+                    </ul>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="#">I don't believe in astrology but still your writing style is really great! - <em>john</em></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">Wow.. what you said is really true! I'm an aries though - <em>Anto</em></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">Does capricorn and aries is compatibile? - <em>Sarah</em></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">I'm a cancer woman been in love with Leo. Will this work? - <em>Mary</em></a>
-                    </li>
-                </ul>
-            </div>
+            }
         </div>
     </div>
 </div>
