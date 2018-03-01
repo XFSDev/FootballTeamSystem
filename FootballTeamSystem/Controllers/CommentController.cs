@@ -9,6 +9,7 @@
     using FootballTeamSystem.Data;
     using FootballTeamSystem.Data.Model;
     using FootballTeamSystem.ViewModels.Comment;
+    using Infrastructure.Constants;
 
     public class CommentController : BaseController
     {
@@ -37,7 +38,6 @@
                 var viewModel = Mapper.Map<CommentViewModel>(dbComment);
 
                 return RedirectToAction("Details", "Post", new { id = comment.PostId});
-                // return PartialView("_CommentPartial", viewModel);
             }
 
             throw new HttpException(400, "Invalid comment!");

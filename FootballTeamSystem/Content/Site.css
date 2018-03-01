@@ -199,10 +199,14 @@ i.red{
 
 /*Match Table*/
 
-#matchtable>tbody>tr>td {
-    width: 20%;
+
+.result {
+    width: 40px;
 }
 
+.homeTeam {
+    width: 150px;
+}
 .controllers {
     padding-bottom: 50px;
 }

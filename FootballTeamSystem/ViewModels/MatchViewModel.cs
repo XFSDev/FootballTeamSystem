@@ -2,7 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
+
     using FootballTeamSystem.Data.Model;
     using  FootballTeamSystem.Infrastructure.Mapping;
 

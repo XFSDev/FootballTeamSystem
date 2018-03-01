@@ -29,7 +29,7 @@
                         <tr>
                             <th>Match Date</th>
                             <th>Home Team</th>
-                            <th>Result</th>
+                            <th class="result">Result</th>
                             <th>Away Team</th>
                             @if (User.IsInRole(RoleName.CanManagePlayers))
                             {
@@ -38,22 +38,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var match in Model.OrderByDescending(m => m.MatchDate))
+                        @foreach (var match in Model.OrderBy(m => m.MatchDate))  
                         {
                             <tr>
                                 <td class="table-matchdate">@match.MatchDate.ToShortDateString()</td>
-                                <td><i class="fa fa-soccer-ball-o" style="font-size: 24px"></i> @match.HomeTeam</td>
+                                <td class="homeTeam"><i class="fa fa-soccer-ball-o" style="font-size: 24px"></i> @match.HomeTeam</td>
                                 @if (match.MatchStatus == MatchStatus.Upcoming)
                                 {
-                                    <td><i>Upcoming</i></td>
+                                    <td class="text-center text-capitalize"><i>Upcoming</i></td>
 
                                 }
                                 else
                                 {
-                                    <td>@match.HomeTeamScore : @match.AwayTeamScore</td>
+                                    <td class="result text-center">@match.HomeTeamScore : @match.AwayTeamScore</td>
 
                                 }
-                                <td>@match.AwayTeam <i class="fa fa-soccer-ball-o" style="font-size: 24px"></i></td>
+                                <td><i class="fa fa-soccer-ball-o" style="font-size: 24px"></i> @match.AwayTeam </td>
                                 @if (User.IsInRole(RoleName.CanManagePlayers))
                                 {
                                     <td>
@@ -73,7 +73,9 @@
 {
     <script>
         $(document).ready(function () {
-            $("#matchtable").DataTable();
+            $("#matchtable").DataTable({
+                order: [[0, 'desc']]
+            });
         })
     </script>
 }

@@ -79,7 +79,7 @@
                 Data.Matches.Update(updatedMatch);
                 Data.SaveCanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction(c => c.Index());
             }
 
 
@@ -89,7 +89,30 @@
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            return null;
+            var matchToDelete = Data.Matches.GetById(id);
+
+            if (matchToDelete == null)
+            {
+                return HttpNotFound();
+            }
+
+            return this.View(Mapper.Map<MatchViewModel>(matchToDelete));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(MatchViewModel model)
+        {
+            var matchToDelete = Data.Matches.GetById(model.Id);
+
+            if (matchToDelete == null)
+            {
+                return HttpNotFound();
+            }
+
+            this.Data.Matches.Delete(matchToDelete);
+            this.Data.SaveCanges();
+
+            return this.RedirectToAction(c => c.Index());
         }
     }
 }
