@@ -78,6 +78,14 @@
     <Compile Include="Migrations\201802011345025_AddCommentToDomainModel.Designer.cs">
       <DependentUpon>201802011345025_AddCommentToDomainModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802272331359_UpdatePlayerModel1.cs" />
+    <Compile Include="Migrations\201802272331359_UpdatePlayerModel1.Designer.cs">
+      <DependentUpon>201802272331359_UpdatePlayerModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802281000348_AddMatchModel.cs" />
+    <Compile Include="Migrations\201802281000348_AddMatchModel.Designer.cs">
+      <DependentUpon>201802281000348_AddMatchModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Contracts\IPlayerRepository.cs" />
     <Compile Include="IMsSqlDbContext.cs" />
@@ -110,6 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802011345025_AddCommentToDomainModel.resx">
       <DependentUpon>201802011345025_AddCommentToDomainModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802272331359_UpdatePlayerModel1.resx">
+      <DependentUpon>201802272331359_UpdatePlayerModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802281000348_AddMatchModel.resx">
+      <DependentUpon>201802281000348_AddMatchModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

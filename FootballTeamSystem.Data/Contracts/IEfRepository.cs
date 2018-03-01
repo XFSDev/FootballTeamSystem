@@ -10,7 +10,7 @@
 
         IQueryable<T> AllAndDeleted { get; }
 
-        void Add(T post);
+        void Add(T entity);
 
         T GetById(Guid id);
 

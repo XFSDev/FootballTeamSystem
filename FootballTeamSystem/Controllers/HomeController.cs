@@ -6,8 +6,8 @@
     using AutoMapper.QueryableExtensions;
 
     using FootballTeamSystem.Data;
-    using ViewModels;
-    using ViewModels.Post;
+    using FootballTeamSystem.ViewModels;
+    using FootballTeamSystem.ViewModels.Post;
 
     [AllowAnonymous]
     public class HomeController : BaseController

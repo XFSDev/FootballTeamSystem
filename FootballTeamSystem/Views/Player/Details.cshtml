@@ -1,7 +1,65 @@
-﻿@model FootballTeamSystem.ViewModels.PlayerViewModel
+﻿@using FootballTeamSystem.Controllers
+@using FootballTeamSystem.Infrastructure.Constants
+@model FootballTeamSystem.ViewModels.PlayerViewModel
 
 @{
     ViewBag.Title = Model.FullName;
 }
 
-<h2>@Model.FullName</h2>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/players/">Players</a></li>
+            <li class="active">@Model.Nickname</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 ">
+        <div align="center">
+            <img alt="User Pic" src="@Model.PlayerImagePath" id="profile-image1" class="img-rounded img-responsive">
+
+            <br>
+
+            <!-- /input-group -->
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>@Model.Nickname</h2>
+        <div class="col-sm-5 col-xs-6 tital ">Full Name:</div><div class="col-sm-7 col-xs-6 ">@Model.FullName</div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <div class="col-sm-5 col-xs-6 tital ">Shirt Number:</div><div class="col-sm-7">@Model.ShirtNumber </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <div class="col-sm-5 col-xs-6 tital ">Position:</div><div class="col-sm-7">@Model.Position </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <div class="col-sm-5 col-xs-6 tital ">Date Of Birth:</div><div class="col-sm-7">@Model.Birthdate.ToShortDateString()</div>
+        @{
+            if (Model.IsCaptain)
+            {
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <div class="col-sm-5 col-xs-6 tital ">Role:</div><div class="col-sm-7">Captain</div>
+            }
+            else if (Model.IsViceCaptain)
+            {
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <div class="col-sm-5 col-xs-6 tital ">Role:</div><div class="col-sm-7">Vice Captain</div>
+            }
+
+        }
+        
+      
+    </div>
+    @{
+        if (User.IsInRole(RoleName.CanManagePlayers))
+        {
+            <td>@(Html.ActionLink<PlayerController>("Edit", c => c.Edit(Model.Id), null, new {@class= "btn btn-default btn-sm" }))</td>
+            <td>@(Html.ActionLink<PlayerController>("Delete", c => c.Delete(Model.Id), null, new{@class= "btn btn-danger btn-sm" }))</td>
+        }
+    }
+</div>

@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ServiceHelper.cs" />
+    <Compile Include="Contracts\IPlayerService.cs" />
     <Compile Include="Contracts\IPostService.cs" />
     <Compile Include="Contracts\IService.cs" />
+    <Compile Include="PlayerService.cs" />
     <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

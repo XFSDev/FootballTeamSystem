@@ -1,0 +1,79 @@
+﻿@using FootballTeamSystem.Controllers
+@using FootballTeamSystem.Data.Model
+@using FootballTeamSystem.Infrastructure.Constants
+@model  IQueryable<FootballTeamSystem.ViewModels.MatchViewModel>
+
+
+@{
+    ViewBag.Title = "All Matches";
+}
+
+<div class=" container">
+    <div class="row">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Matches</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="controllers">
+                @if (User.IsInRole(RoleName.CanManagePlayers))
+                {
+                    @(Html.ActionLink<MatchController>("Create new matchday", m => m.Create(), null, new { @class = "btn btn-primary btn-sm pull-right" }))
+                }
+            </div>
+            <div class="table-responsive col-lg-12">
+                <table class="table table-striped table-hover " id="matchtable">
+                    <thead>
+                        <tr>
+                            <th>Match Date</th>
+                            <th>Home Team</th>
+                            <th>Result</th>
+                            <th>Away Team</th>
+                            @if (User.IsInRole(RoleName.CanManagePlayers))
+                            {
+                                <th>Manage</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var match in Model.OrderByDescending(m => m.MatchDate))
+                        {
+                            <tr>
+                                <td class="table-matchdate">@match.MatchDate.ToShortDateString()</td>
+                                <td><i class="fa fa-soccer-ball-o" style="font-size: 24px"></i> @match.HomeTeam</td>
+                                @if (match.MatchStatus == MatchStatus.Upcoming)
+                                {
+                                    <td><i>Upcoming</i></td>
+
+                                }
+                                else
+                                {
+                                    <td>@match.HomeTeamScore : @match.AwayTeamScore</td>
+
+                                }
+                                <td>@match.AwayTeam <i class="fa fa-soccer-ball-o" style="font-size: 24px"></i></td>
+                                @if (User.IsInRole(RoleName.CanManagePlayers))
+                                {
+                                    <td>
+                                        @(Html.ActionLink<MatchController>("Edit", c => c.Edit(match.Id), null, new { @class = "btn btn-info btn-sm" }))
+                                        @(Html.ActionLink<MatchController>("Delete", c => c.Delete(match.Id), null, new { @class = "btn btn-danger btn-sm" }))
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#matchtable").DataTable();
+        })
+    </script>
+}

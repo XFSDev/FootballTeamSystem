@@ -5,5 +5,6 @@
         public const string Home = "Home";
         public const string Post = "Post";
         public const string Player = "Player";
+        public const string Match = "Match";
     }
 }

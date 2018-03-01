@@ -15,6 +15,8 @@
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
+        public string Nickname { get; set; }
+
         [Required]
         [Display(Name = "Date of birth")]
         public DateTime Birthdate { get; set; }

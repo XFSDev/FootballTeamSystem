@@ -1,39 +1,37 @@
 ﻿namespace FootballTeamSystem.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Data;
+
+    using FootballTeamSystem.Data;
     using FootballTeamSystem.Data.Model;
     using FootballTeamSystem.ViewModels.Post;
     using FootballTeamSystem.Infrastructure.Constants;
     using FootballTeamSystem.Services.Contracts;
-    using ViewModels.Comment;
+    using FootballTeamSystem.ViewModels.Comment;
 
     [Authorize(Roles = RoleName.CanManagePosts)]
     public class PostController : BaseController
     {
-        private readonly IPostService _postService;
+        private readonly IPostService postService;
 
         public PostController(IFootballSystemData data, IPostService postService) : base(data)
         {
-            this._postService = postService;
+            this.postService = postService;
         }
 
         [Route("posts")]
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var posts = _postService.GetPosts().ProjectTo<SingleDetailsPostViewModel>();
-
             var viewModel = new IndexPostViewModel
             {
-                Posts = _postService.GetPosts().ProjectTo<SingleDetailsPostViewModel>(),
+                Posts = postService.GetPosts().ProjectTo<SingleDetailsPostViewModel>(),
                 RecentComments = Data.Comments.All.OrderByDescending(c=> c.CreatedOn).Take(6).ProjectTo<IndexCommentViewModel>()
             };
 
@@ -52,7 +50,7 @@
         {
             if (ModelState.IsValid)
             {
-                _postService.AddPost(Mapper.Map<Post>(post), post.UploadedImage);
+                postService.AddPost(Mapper.Map<Post>(post), post.UploadedImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
@@ -64,7 +62,7 @@
         [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
-            var post = _postService.GetPostById(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
             {
@@ -78,7 +76,7 @@
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var post = _postService.GetPostById(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
                 return HttpNotFound();
@@ -92,18 +90,16 @@
         {
             if (ModelState.IsValid)
             {
-                var postToUpdate = _postService.GetPostById(model.Id);
+                var postInDb = postService.GetPostById(model.Id);
 
-                if (postToUpdate == null)
+                if (postInDb == null)
                 {
                     return HttpNotFound();
                 }
 
-                postToUpdate.Title = model.Title;
-                postToUpdate.Content = model.Content;
-                postToUpdate.IsFeaturedPost = model.IsFeaturedPost;
+                var updatedPost = Mapper.Map(model, postInDb);
 
-                _postService.UpdatePost(postToUpdate, model.UploadedImage);
+                postService.UpdatePost(updatedPost, model.UploadedImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
@@ -114,7 +110,7 @@
         [HttpGet]
         public ActionResult Delete(Guid id)
         {
-            var post = _postService.GetPostById(id);
+            var post = postService.GetPostById(id);
 
             if (post == null)
             {
@@ -128,7 +124,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Delete(DeletePostViewModel model)
         {
-            var isDeleted = _postService.DeletePost(model.Id);
+            var isDeleted = postService.DeletePost(model.Id);
 
             if (isDeleted == false)
             {

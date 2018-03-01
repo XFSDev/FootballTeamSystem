@@ -52,6 +52,12 @@
                 }
 
                 this.Data.Posts.Delete(post);
+
+                foreach (var comment in post.Comments)
+                {
+                    this.Data.Comments.Delete(comment);
+                }
+
                 this.Data.SaveCanges();
 
                 return true;

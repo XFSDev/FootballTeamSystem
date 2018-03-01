@@ -5,8 +5,9 @@ namespace FootballTeamSystem.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Data;
-    using Data.Model;
+
+    using FootballTeamSystem.Data;
+    using FootballTeamSystem.Data.Model;
 
     public class BaseController : Controller
     {

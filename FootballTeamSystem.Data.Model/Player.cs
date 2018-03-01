@@ -14,6 +14,8 @@
         [StringLength(50)]
         public string FullName { get; set; }
 
+        public string Nickname { get; set; }
+
         [Required]
         public DateTime Birthdate { get; set; }
 

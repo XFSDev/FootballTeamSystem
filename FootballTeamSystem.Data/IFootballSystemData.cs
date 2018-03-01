@@ -11,6 +11,7 @@
        IEfRepository<Player> Players { get; }
         IEfRepository<Comment> Comments { get; }
         IEfRepository<User> Users { get; }
+        IEfRepository<Match> Matches { get; }
 
         IMsSqlDbContext Context { get; }
 

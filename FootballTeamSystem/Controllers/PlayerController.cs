@@ -8,17 +8,20 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
-    using Data;
-    using Data.Model;
-    using Infrastructure.Constants;
-    using ViewModels;
+    using FootballTeamSystem.Data;
+    using FootballTeamSystem.Data.Model;
+    using FootballTeamSystem.Infrastructure.Constants;
+    using FootballTeamSystem.ViewModels;
+    using FootballTeamSystem.Services.Contracts;
 
     [Authorize(Roles = RoleName.CanManagePlayers)]
     public class PlayerController : BaseController
     {
-        public PlayerController(IFootballSystemData footballSystemData)
+        private readonly IPlayerService playerService;
+        public PlayerController(IFootballSystemData footballSystemData, IPlayerService playerService)
             : base(footballSystemData)
         {
+            this.playerService = playerService;
         }
 
         [HttpGet]
@@ -43,9 +46,7 @@
         {
             if (ModelState.IsValid)
             {
-                //TODO: Make this to add image to player
-                Data.Players.Add(Mapper.Map<PlayerViewModel,Player>(player));
-                Data.SaveCanges();
+                this.playerService.AddPlayer(Mapper.Map<PlayerViewModel,Player>(player),playerImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
@@ -74,16 +75,10 @@
             {
                 var player = Data.Players.GetById(model.Id);
 
-                player.FullName = model.FullName;
-                player.Birthdate = model.Birthdate;
-                player.Position = model.Position;
-                player.ShirtNumber = model.ShirtNumber;
-                player.IsCaptain = model.IsCaptain;
-                player.IsViceCaptain = model.IsViceCaptain;
+                var updatedPlayer = Mapper.Map(model, player);
 
 
-               //TODO: Make this work! _footballSystemData.Players.Update(player, playerImage);
-                Data.SaveCanges();
+               playerService.UpdatePlayer(updatedPlayer, playerImage);
 
                 return this.RedirectToAction(c => c.Index());
             }
