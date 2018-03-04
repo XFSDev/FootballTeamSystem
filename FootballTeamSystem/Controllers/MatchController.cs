@@ -19,6 +19,7 @@
         }
 
         [AllowAnonymous]
+        [Route("results")]
         public ActionResult Index()
         {
             var matches = Data.Matches.All.ProjectTo<MatchViewModel>();

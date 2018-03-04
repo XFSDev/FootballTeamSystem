@@ -224,7 +224,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\BundleConfig.cs" />
     <Compile Include="Configuration\FilterConfig.cs" />
     <Compile Include="Configuration\IdentityConfig.cs" />
@@ -387,8 +386,14 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\footballTeamSystem-history.jpg" />
+    <Content Include="Content\Images\footballTeamSystem-news.jpg" />
     <Content Include="Content\Images\footballTeamSystem-noavatar.png" />
     <Content Include="Content\Images\footballTeamSystem-noPostImage.png" />
+    <Content Include="Content\Images\footballTeamSystem-results.jpg" />
+    <Content Include="Content\Images\footballTeamSystem-team.jpg" />
+    <Content Include="Content\Images\footballTeamSystem-team2017.jpg" />
+    <Content Include="Content\Images\footbalTeamSystem-frontpage.jpg" />
     <Content Include="Content\Uploads\Players\hristo_borisov.jpg" />
     <Content Include="Content\Uploads\Players\ivan_dimitrov.jpg" />
     <Content Include="Content\Uploads\Players\t_1508766116_aleksander_mitev.jpg" />
@@ -542,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Start\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,7 +2,7 @@
 @using FootballTeamSystem.Infrastructure.Constants
 @model FootballTeamSystem.ViewModels.Post.IndexPostViewModel
 @{
-    ViewBag.Title = "Posts";
+    ViewBag.Title = "Latest Posts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,9 +16,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-4">
-        <h1>Latest Posts</h1>
-    </div>
     <div class=" col-xs-offset-6 col-xs-2">
         @{
             if (User.IsInRole(RoleName.CanManagePosts))
