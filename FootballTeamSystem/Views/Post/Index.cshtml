@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="row">
-    <div class=" col-xs-offset-6 col-xs-2">
+    <div class="col-xs-2">
         @{
             if (User.IsInRole(RoleName.CanManagePosts))
             {
@@ -48,7 +48,7 @@
 
                         <hr>
 
-                        <img src="@post.ImagePath" class="img-responsive homeListImage">
+                        <img src="/Content/Uploads/Posts/banner.jpg" class="img-responsive homeListImage">
 
                         <br />
 
@@ -93,7 +93,7 @@
             {
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Lastest Hot News</h4>
+                        <h4>Latest Hot News</h4>
                     </div>
                     <ul class="list-group">
                         @foreach (var hotpost in Model.Posts.Where(p => p.IsFeaturedPost).Take(6))
@@ -115,7 +115,7 @@
                         @foreach (var comment in Model.RecentComments)
                         {
                             <li class="list-group-item">
-                                <a href="/post/details/@comment.PostId">@comment.Content - <em>@comment.AuthorName</em></a>
+                                <a href="/post/details/@comment.PostId"><em>@comment.AuthorName says:</em>  @comment.Content</a>
                             </li>
                         }
                     </ul>

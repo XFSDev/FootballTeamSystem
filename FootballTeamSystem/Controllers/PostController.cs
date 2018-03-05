@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions;
 
@@ -79,7 +80,10 @@
             var post = postService.GetPostById(id);
 
             if (post == null)
+            {
                 return HttpNotFound();
+
+            }
 
             return this.View(Mapper.Map<EditPostViewModel>(post));
         }
@@ -92,12 +96,19 @@
             {
                 var postInDb = postService.GetPostById(model.Id);
 
+                var postInDbImg = postInDb.ImagePath;
+
                 if (postInDb == null)
                 {
                     return HttpNotFound();
                 }
 
                 var updatedPost = Mapper.Map(model, postInDb);
+
+                if (updatedPost.ImagePath == null && postInDb != null)
+                {
+                    updatedPost.ImagePath = postInDbImg;
+                }
 
                 postService.UpdatePost(updatedPost, model.UploadedImage);
 

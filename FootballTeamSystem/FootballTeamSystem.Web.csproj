@@ -394,6 +394,10 @@
     <Content Include="Content\Images\footballTeamSystem-team.jpg" />
     <Content Include="Content\Images\footballTeamSystem-team2017.jpg" />
     <Content Include="Content\Images\footbalTeamSystem-frontpage.jpg" />
+    <Content Include="Content\Images\history\footballTeamSystem_13-14.jpg" />
+    <Content Include="Content\Images\history\footballTeamSystem_14-15.jpg" />
+    <Content Include="Content\Images\history\footballTeamSystem_15-16.jpg" />
+    <Content Include="Content\Images\history\footballTeamSystem_16-17.jpg" />
     <Content Include="Content\Uploads\Players\hristo_borisov.jpg" />
     <Content Include="Content\Uploads\Players\ivan_dimitrov.jpg" />
     <Content Include="Content\Uploads\Players\t_1508766116_aleksander_mitev.jpg" />
@@ -504,7 +508,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -544,6 +547,7 @@
     <Content Include="Views\Match\Create.cshtml" />
     <Content Include="Views\Match\Edit.cshtml" />
     <Content Include="Views\Match\Delete.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

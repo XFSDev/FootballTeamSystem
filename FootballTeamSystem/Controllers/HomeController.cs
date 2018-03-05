@@ -25,16 +25,13 @@
         }
 
 
-        public ActionResult About()
+        public ActionResult History()
         {
-           //TODO: Implement Timespan graph
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            //TODO: Implement EmailSender()
 
             return View();
         }
